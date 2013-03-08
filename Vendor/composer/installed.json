@@ -1,33 +1,30 @@
 [
     {
         "name": "jdorn/sql-formatter",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/jdorn/sql-formatter.git",
-            "reference": "2724ddb7fb79851a557d868a688fc269960bff87"
+            "url": "git://github.com/jdorn/sql-formatter.git",
+            "reference": "v1.2.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/jdorn/sql-formatter/zipball/2724ddb7fb79851a557d868a688fc269960bff87",
-            "reference": "2724ddb7fb79851a557d868a688fc269960bff87",
+            "url": "https://github.com/jdorn/sql-formatter/archive/v1.2.0.zip",
+            "reference": "v1.2.0",
             "shasum": ""
         },
         "require": {
             "php": ">=5.2.4"
         },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*"
-        },
-        "time": "2013-03-08 02:26:59",
+        "time": "2012-12-22 21:46:50",
         "type": "library",
         "extra": {
             "branch-alias": {
                 "dev-master": "1.3.x-dev"
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "classmap": [
                 "lib"

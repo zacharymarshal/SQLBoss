@@ -114,4 +114,4 @@ CakeLog::config('error', array(
     'file' => 'error',
 ));
 
-CakePlugin::load('Composer', array('bootstrap' => true));
+App::import('Vendor', 'autoload');
