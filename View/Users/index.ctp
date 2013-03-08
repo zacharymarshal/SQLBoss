@@ -11,7 +11,7 @@
 				<tr>
 						<th><?php echo $this->Paginator->sort('id', '#'); ?></th>
 						<th><?php echo $this->Paginator->sort('username'); ?></th>
-						<th><?php echo $this->Paginator->sort('group_id'); ?></th>
+						<th><?php echo $this->Paginator->sort('access_role'); ?></th>
 						<th><?php echo $this->Paginator->sort('modified'); ?></th>
 						<th class="actions"></th>
 				</tr>
@@ -22,7 +22,7 @@
 					<td><?php echo h($user['User']['id']); ?></td>
 					<td><?php echo h($user['User']['username']); ?></td>
 					<td>
-						<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
+						<?php echo h($user['User']['access_role']); ?>
 					</td>
 					<td><?php echo $this->Time->niceShort($user['User']['modified']); ?></td>
 					<td class="actions">

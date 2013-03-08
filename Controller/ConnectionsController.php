@@ -4,6 +4,22 @@ App::uses('AppController', 'Controller');
 
 class ConnectionsController extends AppController
 {
+	public function isAuthorized($user)
+	{
+		if ($this->action == 'add') {
+			return true;
+		}
+
+		if (in_array($this->action, array('edit', 'delete'))) {
+			$connection_id = $this->request->params['pass'][0];
+			if ($this->Connection->isOwnedBy($connection_id, $user['id'])) {
+				return true;
+			}
+		}
+
+		return parent::isAuthorized($user);
+	}
+
 	public function index()
 	{
 		$this->Connection->recursive = 0;

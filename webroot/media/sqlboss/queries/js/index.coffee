@@ -23,5 +23,3 @@ $ =>
     if e.keyCode == 116 || (e.keyCode == 13 && e.shiftKey)
       e.preventDefault()
       query_form.submit()
-
-  @QQ = query_editor

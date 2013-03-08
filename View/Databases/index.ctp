@@ -1,6 +1,5 @@
 <?php
-$this->Html->script('databases/index', array('inline' => false));
-$this->Html->css('databases/index', null, array('inline' => false));
+$this->Html->script('/media/sqlboss/databases/js/index', array('inline' => false));
 ?>
 
 <div class="row-fluid">

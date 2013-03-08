@@ -1,0 +1,7 @@
+.query-remove {
+	color: #999;
+}
+.query-remove:hover {
+	color: red;
+	text-decoration: none;
+}

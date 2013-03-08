@@ -25,13 +25,12 @@
       localStorage.setItem('cursor', JSON.stringify(query_editor.getCursorPosition()));
       return true;
     });
-    $(window).keydown(function(e) {
+    return $(window).keydown(function(e) {
       if (e.keyCode === 116 || (e.keyCode === 13 && e.shiftKey)) {
         e.preventDefault();
         return query_form.submit();
       }
     });
-    return _this.QQ = query_editor;
   });
 
 }).call(this);
