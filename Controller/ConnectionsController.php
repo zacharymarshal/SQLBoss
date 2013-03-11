@@ -49,7 +49,8 @@ class ConnectionsController extends AppController
 		$users = $this->Connection->User->find('list', array(
 			'fields' => array('User.id', 'User.username'),
 		));
-		$user_id = $this->Auth->user('id');
+		$user_id = (isset($this->request->params['named']['user_id']) ?
+			$this->request->params['named']['user_id'] : $this->Auth->user('id'));
 		$this->set(compact('drivers', 'users', 'user_id'));
 	}
 

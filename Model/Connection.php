@@ -31,20 +31,20 @@ class Connection extends AppModel
 
 	public function getRemoteConnection($connection)
 	{
-		$driver = $connection['Connection']['driver'];
+		$driver = $connection['driver'];
 		if ($driver == 'pgsql') {
 			$classname = 'SQLBoss\Datasource\Postgres';
 		} elseif ($driver == 'sqlite') {
 			$classname = 'SQLBoss\Datasource\Sqlite';
 		} elseif ($driver == 'mysql') {
-			$classname = 'DatabaseMysql';
+			$classname = 'SQLBoss\Datasource\Mysql';
 		}
 
 		return new $classname(array(
-			'host'       => $connection['Connection']['host'],
-			'username'   => $connection['Connection']['username'],
-			'password'   => $connection['Connection']['password'],
-			'dbname'     => $connection['Connection']['database_name'],
+			'host'       => $connection['host'],
+			'username'   => $connection['username'],
+			'password'   => $connection['password'],
+			'dbname'     => $connection['database_name'],
 		));
 	}
 

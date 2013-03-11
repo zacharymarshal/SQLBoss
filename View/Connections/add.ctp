@@ -11,9 +11,9 @@
 			<legend><?php echo __('Add Connection'); ?></legend>
 			<?php
 			echo $this->Form->input('user_id', array('default' => $user_id));
+			echo $this->Form->input('label', array('type' => 'text'));
 			echo $this->Form->input('driver', array('options' => $drivers));
 			echo $this->Form->input('host', array('type' => 'text'));
-			echo $this->Form->input('label', array('type' => 'text'));
 			echo $this->Form->input('username', array('type' => 'text'));
 			echo $this->Form->input('password', array('value' => ''));
 			echo $this->Form->input('database_name', array('type' => 'text'));

@@ -75,7 +75,7 @@
 							<?php echo $this->Html->link(
 								$auth_user['username'],
 								array('controller' => 'users', 'action' => 'view', $auth_user['id']),
-								array('title' => 'View profile', 'style' => 'color: #08c;')
+								array('title' => 'View profile')
 							) ?>
 						</li>
 						<li class="dropdown">

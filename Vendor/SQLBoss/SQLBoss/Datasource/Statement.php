@@ -49,7 +49,7 @@ class Statement
 
     public function fetch()
     {
-        return $this->pdo_statement->fetch(PDO::FETCH_ASSOC);
+        return $this->pdo_statement->fetch(PDO::FETCH_NUM);
     }
 
     public function isSelect()

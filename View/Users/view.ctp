@@ -7,7 +7,7 @@ $this->Html->css('/media/sqlboss/users/css/view', null, array('inline' => false)
 	<div class="actions span2">
 		<ul class="nav nav-tabs nav-stacked">
 			<li><?php echo $this->Html->link(__('Edit Profile'), array('action' => 'edit', $user['User']['id'])); ?></li>
-			<li><?php echo $this->Html->link(__('New Connection'), array('controller' => 'connections', 'action' => 'add')); ?></li>
+			<li><?php echo $this->Html->link(__('New Connection'), array('controller' => 'connections', 'action' => 'add', 'user_id' => $user['User']['id'])); ?></li>
 		</ul>
 	</div>
 	<div class="span10">
@@ -38,8 +38,8 @@ $this->Html->css('/media/sqlboss/users/css/view', null, array('inline' => false)
 					<td><?php echo h($connection['database_name']); ?></td>
 					<td><?php echo $this->Time->niceShort($connection['modified']); ?></td>
 					<td class="actions">
-						<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $connection['id']), array('class' => 'btn')); ?>
-						<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $connection['id']), array('class' => 'btn btn-danger'), __('Are you sure you want to delete %s?', $connection['label'])); ?>
+						<?php echo $this->Html->link(__('Edit'), array('controller' => 'connections', 'action' => 'edit', $connection['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'connections', 'action' => 'delete', $connection['id']), array('class' => 'btn btn-danger'), __('Are you sure you want to delete %s?', $connection['label'])); ?>
 					</td>
 				</tr>
 				<?php endforeach ?>

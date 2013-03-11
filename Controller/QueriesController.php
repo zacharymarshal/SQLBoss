@@ -166,7 +166,7 @@ class QueriesController extends AppController
 			));
 			$connnection = $this->Connection->getConnection();
 			$statements = $connnection
-				->getRemoteConnection($connnection->data)
+				->getRemoteConnection($connnection->data['Connection'])
 				->query($this->request->data['Query']['query_sql']);
 			$this->set(compact('statements'));
 		} catch (PDOException $e) {

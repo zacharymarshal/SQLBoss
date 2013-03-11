@@ -5,7 +5,7 @@
   $(function() {
     var cursor, query_editor, query_field, query_form;
     query_editor = ace.edit('query_sql_editor');
-    query_editor.setTheme('ace/theme/tomorrow');
+    query_editor.setTheme('ace/theme/tomorrow_night');
     query_editor.setFontSize('14px');
     query_editor.setShowInvisibles(true);
     query_editor.setDisplayIndentGuides(true);

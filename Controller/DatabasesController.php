@@ -1,8 +1,8 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('DatabaseList', 'SQLBoss');
 App::uses('Connection', 'Model');
-App::uses('Hash', 'Utility');
 
 class DatabasesController extends AppController
 {
@@ -21,30 +21,9 @@ class DatabasesController extends AppController
 
 	public function index()
 	{
-		$connection = new Connection();
-		$connections = $connection->find('all', array(
-			'conditions' => array('user_id' => $this->Auth->user('id')),
-			'order'      => array('Connection.id')
-		));
-		
-		$this->set('connections', $connections);
-
-		$all_databases = array();
-		foreach ($connections as $connection_row) {
-			$db = $connection->getRemoteConnection($connection_row);
-			$cache_key = "databases_for_server_{$connection_row['Connection']['id']}";
-			$databases = Cache::read($cache_key);
-			if ( ! $databases) {
-				$databases = $db->getDatabases();
-				foreach ($databases as &$database) {
-					$database = $database + $connection_row;
-				}
-				Cache::write($cache_key, $databases);
-			}
-			$all_databases = array_merge($all_databases, $databases);
-		}
-		
-		$databases_sorted_by_name = Hash::sort($all_databases, '{n}.name', 'asc');
-		$this->set('databases', $databases_sorted_by_name);
+		$database_list = new DatabaseList($this->Auth->user('id'), new Connection);
+		$this->set('connections', $database_list->getConnections());
+		$this->set('databases', $database_list->getDatabases());
+		$this->set('errors', $database_list->getErrors());
 	}
 }

@@ -15,14 +15,14 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
 	<div class="row-fluid">
 		<div id="query_sql_editor" class="span12"><?php echo isset($this->request->data['Query']) && isset($this->request->data['Query']['query_sql']) ? $this->request->data['Query']['query_sql'] : '' ?></div>
 	</div>
-	<p></p>
-	<div class="controls">
+	<div class="controls" style="margin-top: 25px;">
 		<div class="input-append">
 			<?php echo $this->Form->input('label', array(
 				'type'        => 'text',
 				'label'       => false,
 				'div'         => false,
-				'class'       => 'span12'
+				'class'       => 'span12',
+				'placeholder' => 'Name your query to be saved for later'
 			)); ?>
 			<?php echo $this->Form->Submit('Save Query', array(
 				'name'  => 'save',
@@ -30,7 +30,6 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
 				'div'   => false
 			)) ?>
 		</div>
-		<div class="help-block">Name your query to be saved for later</div>
 	</div>
 	<div class="form-actions">
 		<?php echo $this->Form->Submit('Run', array('class' => 'btn btn-success')) ?>
