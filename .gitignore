@@ -5,3 +5,8 @@ app/tmp/*
 app/[Cc]onfig/core.php
 app/[Cc]onfig/database.php
 !empty
+.DS_Store
+
+webroot/media/.DS_Store
+
+webroot/.DS_Store

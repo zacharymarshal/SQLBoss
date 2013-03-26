@@ -5,7 +5,9 @@
 	<?php
 		echo $this->Form->input('username');
 		echo $this->Form->input('password');
-		echo $this->Form->input('group_id');
+		echo $this->Form->input('access_role', array(
+			'options' => $access_roles
+		));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

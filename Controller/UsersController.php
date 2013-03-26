@@ -46,8 +46,11 @@ class UsersController extends AppController
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}
 		}
-		$groups = $this->User->Group->find('list');
-		$this->set(compact('groups'));
+		$access_roles = array(
+			'admin'   => 'Administrator',
+			'limited' => 'Limited'
+		);
+		$this->set(compact('access_roles'));
 	}
 
 	public function edit($id = null)
