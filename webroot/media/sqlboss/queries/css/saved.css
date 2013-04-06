@@ -5,3 +5,37 @@
 	color: red;
 	text-decoration: none;
 }
+
+.query {
+	margin: 20px 0;
+}
+
+.query-sql_box {
+	margin-top: 10px;
+	border: 1px solid #373b41;
+	position: relative;
+}
+
+.query-sql_box_highlight {
+	border-color: #81a2be;
+}
+
+.query-link_overlay {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	visibility: hidden;
+	z-index: 50;
+}
+
+.query-link_overlay .link {
+	background-color: rgba(0,0,0,0.75);
+	color: #fff;
+	margin: -14px 0 0 0;
+	padding: 4px 8px 4px 10px;
+	height: 20px;
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	z-index: 100;
+}

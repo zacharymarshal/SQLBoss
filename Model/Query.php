@@ -10,6 +10,13 @@ class Query extends AppModel
 		'query_hash' => array('notempty', 'isUnique'),
 	);
 
+	public $belongsTo = array(
+		'User' => array(
+			'className'  => 'User',
+			'foreignKey' => 'user_id',
+		)
+	);
+
 	public function getQueryHash($query_sql)
 	{
 		return md5($query_sql);
