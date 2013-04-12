@@ -71,9 +71,12 @@ abstract class AbstractDatasource
             $this->db = new PDO(
                 $this->getDsn(),
                 $this->options['username'],
-                $this->options['password']
+                $this->options['password'],
+                array(
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_TIMEOUT => 2
+                )
             );
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         return $this->db;
     }
