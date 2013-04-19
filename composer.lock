@@ -1,5 +1,9 @@
 {
-    "hash": "90c9ebdab035b03a2dd50e2c2636f9dd",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "a302be4b041f19cc740bcc99ac4ecc99",
     "packages": [
         {
             "name": "jdorn/sql-formatter",
