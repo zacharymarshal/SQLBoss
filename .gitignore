@@ -10,3 +10,5 @@ app/[Cc]onfig/database.php
 webroot/media/.DS_Store
 
 webroot/.DS_Store
+
+Vendor/*
