@@ -1,4 +1,9 @@
 {
+	"autoload": {
+		"psr-0": {
+			"SQLBoss": "Lib/"
+		}
+	},
 	"config": {
 		"vendor-dir": "Vendor"
 	},

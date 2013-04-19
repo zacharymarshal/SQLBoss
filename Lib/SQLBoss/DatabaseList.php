@@ -1,6 +1,10 @@
 <?php 
 
-App::uses('Hash', 'Utility');
+namespace SQLBoss;
+
+use \Cache;
+use \Hash;
+use \Connection;
 
 class DatabaseList
 {

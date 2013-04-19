@@ -8,11 +8,12 @@
 	</title>
 	<?php
 		echo $this->Html->meta('icon', $this->Html->url('/favicon.png'));
-		echo $this->Html->css('/media/twitter-bootstrap/bootstrap/css/bootstrap.min');
-		echo $this->Html->css('/media/twitter-bootstrap/bootstrap/css/bootstrap-responsive.min');
+		echo $this->Html->css('/media/twitter-bootstrap/css/bootstrap.min');
+		echo $this->Html->css('/media/twitter-bootstrap/css/bootstrap-responsive.min');
+		echo $this->Html->css('/media/font-awesome/css/font-awesome.min');
 
-		echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
-		echo $this->Html->script('/media/twitter-bootstrap/bootstrap/js/bootstrap.min');
+		echo $this->Html->script('/media/jquery/js/jquery.min.js');
+		echo $this->Html->script('/media/twitter-bootstrap/js/bootstrap.min');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
