@@ -12,12 +12,12 @@
 
 .query-sql_box {
 	margin-top: 10px;
-	border: 1px solid #373b41;
+	border: 1px solid #CCCCCC;
 	position: relative;
 }
 
 .query-sql_box_highlight {
-	border-color: #81a2be;
+	border-color: #96C7DE;
 }
 
 .query-link_overlay {
