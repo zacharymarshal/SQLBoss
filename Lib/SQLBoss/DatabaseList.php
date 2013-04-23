@@ -44,7 +44,7 @@ class DatabaseList
 			try {
 				$this->databases = array_merge($this->getDatabasesForConnection($connection), $this->databases);
 			}
-			catch (PDOException $e) {
+			catch (\PDOException $e) {
 				$this->errors[] = array(
 					'message'   => "Error connecting to {$connection['label']}",
 					'exception' => $e->getMessage()
@@ -67,13 +67,18 @@ class DatabaseList
 			return $databases;
 		}
 		$db = $this->connection->getRemoteConnection($connection);
-		$databases = $db->getDatabases();
+		$databases = $db->getSchemaManager()->listDatabases();
+		$built_out_databases = array();
 		// Append the connection information to every row
 		// this is useful when displaying the databases
-		foreach ($databases as &$database) {
-			$database['Connection'] = $connection;
+		foreach ($databases as $database) {
+			$built_out_databases[] = array(
+				'id'         => $database,
+				'name'       => $database,
+				'Connection' => $connection
+			);
 		}
-		Cache::write($cache_key, $databases);
-		return $databases;
+		Cache::write($cache_key, $built_out_databases);
+		return $built_out_databases;
 	}
 }

@@ -11,7 +11,7 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
 <div class="queries span12">
 	<?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
 	<?php echo $this->Form->create('Query'); ?>
-	<?php echo $this->Form->input('query_sql', array('label' => false, 'class' => 'hidden')); ?>
+	<?php echo $this->Form->input('query_sql', array('label' => false, 'class' => 'hidden', 'required' => false)); ?>
 	<div class="row-fluid">
 		<div id="query_sql_editor" class="span12"><?php echo isset($this->request->data['Query']) && isset($this->request->data['Query']['query_sql']) ? $this->request->data['Query']['query_sql'] : '' ?></div>
 	</div>
@@ -43,30 +43,30 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
 <?php endif ?>
 
 <?php if (isset($statements) && $statements): ?>
-	<?php $query_num = 0; ?>
 	<?php foreach ($statements as $statement): ?>
-	<?php $query_num++ ?>
-	<?php $count = $statement->getCount(); ?>
+	<?php $count = $statement['statement']->rowCount(); ?>
 	<h4 style="font-weight: normal">
 		<strong><?php echo $count; ?></strong> record(s) in 
-		<strong><?php echo round($statement->getExecutionTime(), 3) ?></strong> seconds 
-		<small class="muted"><?php echo $this->Text->ellipsize($statement->getQuery(), 100, 0.5) ?></small>
+		<strong><?php echo round($statement['execution_time'], 3) ?></strong> seconds 
+		<small class="muted"><?php echo $this->Text->ellipsize($statement['query'], 100, 0.5) ?></small>
 	</h4>
 	<?php if ($count > 0): ?>
 	<div style="overflow-x: auto;">
 		<table class="table table-condensed table-striped table-bordered">
 			<thead>
 			<tr>
-				<?php foreach ($statement->getColumns() as $column): ?>
-					<th><?php echo $column['name']; ?></th>
-				<?php endforeach ?>
+			<?php $columns = array(); ?>
+			<?php for ($column_index = 0; $column_index < $statement['statement']->columnCount(); $column_index++): ?>
+				<?php $columns[$column_index] = $column = $statement['statement']->getColumnMeta($column_index); ?>
+				<th><?php echo $column['name']; ?></th>
+			<?php endfor ?>
 			</tr>
 			</thead>
 			<tbody>
-			<?php while ($row = $statement->fetch()) { ?>
+			<?php while ($row = $statement['statement']->fetch(PDO::FETCH_NUM)) { ?>
 			<tr>
-				<?php foreach ($row as $value): ?>
-					<td><?php echo ($value === NULL ? "<em>NULL</em>" : $value) ?></td>
+				<?php foreach ($row as $column_index => $value): ?>
+					<td><?php echo ($value === NULL ? "<em>NULL</em>" : ($columns[$column_index]['pdo_type'] == PDO::PARAM_BOOL ? ($value ? "<em>TRUE</em>" : "<em>FALSE</em>") : $value)) ?></td>
 				<?php endforeach ?>
 			</tr>
 			<?php } ?>

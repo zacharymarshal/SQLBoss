@@ -5,6 +5,7 @@ App::uses('Component', 'Controller');
 class ConnectionComponent extends Component
 {
 	protected $controller;
+	protected $connection;
 
 	public function startup($controller)
 	{
@@ -30,6 +31,9 @@ class ConnectionComponent extends Component
 
 	public function getConnection()
 	{
+		if (isset($this->connection)) {
+			return $this->connection;
+		}
 		if (isset($this->controller->request->params['connection_id'])) {
 			$connection = new Connection();
 			$connection_id = $this->controller->request->params['connection_id'];
@@ -37,8 +41,15 @@ class ConnectionComponent extends Component
 			if ( ! $connection->data['Connection']['database_name']) {
 				$connection->data['Connection']['database_name'] = $this->controller->request->params['database'];
 			}
-			return $connection;
+			$this->connection = $connection;
+			return $this->connection;
 		}
 		return false;
+	}
+
+	public function getRemoteConnection()
+	{
+		$connection = $this->getConnection();
+		return $connection->getRemoteConnection($connection->data['Connection']);
 	}
 }

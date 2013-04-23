@@ -36,6 +36,13 @@
 
 				<div class="nav-collapse collapse">
 					<ul class="nav">
+						<li <?php echo ($this->params['controller'] == 'schema' ? 'class="active"' : '') ?>><?php echo $this->Html->link(
+							'Schema',
+							array(
+								'controller' => 'schema',
+								'action'     => 'index'
+							) + $connection_parameters
+						) ?></li>
 						<li <?php echo ($this->params['controller'] == 'queries' && $this->params['action'] == 'index' ? 'class="active"' : '') ?>><?php echo $this->Html->link(
 							'Query',
 							array(

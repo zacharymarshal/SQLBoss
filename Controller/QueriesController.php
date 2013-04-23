@@ -165,9 +165,13 @@ class QueriesController extends AppController
 				)
 			));
 			$connnection = $this->Connection->getConnection();
-			$statements = $connnection
-				->getRemoteConnection($connnection->data['Connection'])
-				->query($this->request->data['Query']['query_sql']);
+			$remote_connection = $connnection->getRemoteConnection($connnection->data['Connection']);
+
+			$query_runner = new \SQLBoss\QueryRunner(array(
+				'remote_connection' => $remote_connection,
+				'sql'               => $this->request->data['Query']['query_sql']
+			));
+			$statements = $query_runner->runQueries();
 			$this->set(compact('statements'));
 		} catch (PDOException $e) {
 			$query_error = $e->getMessage();

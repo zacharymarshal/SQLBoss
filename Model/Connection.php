@@ -31,21 +31,19 @@ class Connection extends AppModel
 
 	public function getRemoteConnection($connection)
 	{
-		$driver = $connection['driver'];
-		if ($driver == 'pgsql') {
-			$classname = 'SQLBoss\Datasource\Postgres';
-		} elseif ($driver == 'sqlite') {
-			$classname = 'SQLBoss\Datasource\Sqlite';
-		} elseif ($driver == 'mysql') {
-			$classname = 'SQLBoss\Datasource\Mysql';
-		}
-
-		return new $classname(array(
-			'host'       => $connection['host'],
-			'username'   => $connection['username'],
-			'password'   => $connection['password'],
-			'dbname'     => $connection['database_name'],
-		));
+		$config = new Doctrine\DBAL\Configuration();
+		$config->setSQLLogger(new Doctrine\DBAL\Logging\DebugStack());
+		return \Doctrine\DBAL\DriverManager::getConnection(array(
+			'dbname'        => $connection['database_name'] ?: 'postgres',
+			'user'          => $connection['username'],
+			'password'      => $connection['password'],
+			'host'          => $connection['host'],
+			'driver'        => "pdo_{$connection['driver']}",
+			'driverOptions' => array(
+				PDO::ATTR_TIMEOUT => 2,
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+			)
+		), $config);
 	}
 
 	public function beforeValidate()
