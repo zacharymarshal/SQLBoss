@@ -36,10 +36,12 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
 	</div>
 	<?php echo $this->Form->end(); ?>
 
-<?php if (isset($query_error)): ?>
+<?php if (isset($query_errors)): ?>
+	<?php foreach ($query_errors as $error): ?>
 	<div class="alert alert-error">
-		<?php echo $query_error ?>
+		<?php echo $error ?>
 	</div>
+	<?php endforeach ?>
 <?php endif ?>
 
 <?php if (isset($statements) && $statements): ?>

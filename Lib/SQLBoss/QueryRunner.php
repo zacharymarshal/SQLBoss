@@ -8,6 +8,7 @@ class QueryRunner
 	protected $in_transaction;
 	protected $multiple_queries;
 	protected $sql;
+	protected $errors = array();
 
 	public function __construct(array $options)
 	{
@@ -30,16 +31,26 @@ class QueryRunner
 		} else {
 			$queries = $this->sql;
 		}
+		
 		$logger = $this->remote_connection->getConfiguration()->getSQLLogger();
 		$statements = array();
 		foreach ($queries as $query) {
-			$statements[] = array(
-				'statement'      => $this->remote_connection->executeQuery($query, $params),
-				'query'          => $logger->queries[$logger->currentQuery]['sql'],
-				'execution_time' => $logger->queries[$logger->currentQuery]['executionMS'],
-			);
+			try {
+				$statements[] = array(
+					'statement'      => $this->remote_connection->executeQuery($query, $params),
+					'query'          => $logger->queries[$logger->currentQuery]['sql'],
+					'execution_time' => $logger->queries[$logger->currentQuery]['executionMS'],
+				);
+			} catch (\Exception $e) {
+				$this->errors[] = $e->getMessage();
+			}
 		}
 		return $statements;
+	}
+
+	public function getErrors()
+	{
+		return $this->errors;
 	}
 
 	protected function getParameters()
