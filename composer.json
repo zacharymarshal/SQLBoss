@@ -4,11 +4,17 @@
 			"SQLBoss": "Lib/"
 		}
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/zacharyrankin/sql-formatter"
+		}
+	],
 	"config": {
 		"vendor-dir": "Vendor"
 	},
 	"require": {
-		"jdorn/sql-formatter": "1.2.0",
+		"jdorn/sql-formatter": "dev-master",
 		"doctrine/dbal":       "2.3.3"
 	}
 }

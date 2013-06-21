@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "363ffbefea3a91d42f95a649e5ad4fe2",
+    "hash": "699b68c5a0b7031b006864c71b3238b7",
     "packages": [
         {
             "name": "doctrine/common",
@@ -139,16 +139,16 @@
         },
         {
             "name": "jdorn/sql-formatter",
-            "version": "v1.2.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git://github.com/jdorn/sql-formatter.git",
-                "reference": "v1.2.0"
+                "url": "https://github.com/zacharyrankin/sql-formatter.git",
+                "reference": "5bf3417cfb47fbdd2a539c1918519d96496f1c69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/jdorn/sql-formatter/archive/v1.2.0.zip",
-                "reference": "v1.2.0",
+                "url": "https://api.github.com/repos/zacharyrankin/sql-formatter/zipball/5bf3417cfb47fbdd2a539c1918519d96496f1c69",
+                "reference": "5bf3417cfb47fbdd2a539c1918519d96496f1c69",
                 "shasum": ""
             },
             "require": {
@@ -157,7 +157,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -165,7 +165,6 @@
                     "lib"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "LGPL"
             ],
@@ -182,7 +181,10 @@
                 "highlight",
                 "sql"
             ],
-            "time": "2012-12-22 21:46:50"
+            "support": {
+                "source": "https://github.com/zacharyrankin/sql-formatter/tree/master"
+            },
+            "time": "2013-06-21 22:21:34"
         }
     ],
     "packages-dev": [
@@ -192,9 +194,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "jdorn/sql-formatter": 20
+    },
     "platform": [
 
     ],
