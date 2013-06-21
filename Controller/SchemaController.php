@@ -16,14 +16,14 @@ class SchemaController extends AppController
 
 	public function tableDefinition()
 	{
-		Doctrine\DBAL\Types\Type::addType('arrayintegertype', 'SQLBoss\DBAL\Types\ArrayIntegerType');
 		$remote_connection = $this->Connection->getRemoteConnection();
-		$platform = $remote_connection->getDatabasePlatform();
-		$platform->registerDoctrineTypeMapping('_int4', 'arrayintegertype');
-		$sm = $remote_connection->getSchemaManager();
-		$table = $sm->listTableDetails($this->params['pass'][0]);
+		$table_definition = new \SQLBoss\TableDefinition(array(
+			'remote_connection' => $remote_connection,
+			'table_name'        => $this->params['pass'][0]
+		));
 
-		$this->set('table_sql', $platform->getCreateTableSQL($table));
-		$this->set('drop_table_sql', $platform->getDropTableSQL($table));
+		$this->set('table_name', $table_definition->getName());
+		$this->set('table_sql', $table_definition->getCreateSql());
+		$this->set('drop_table_sql', $table_definition->getDropSql());
 	}
 }

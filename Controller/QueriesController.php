@@ -35,7 +35,12 @@ class QueriesController extends AppController
 
 	public function index($id = null)
 	{
-		$this->loadQuery($id);
+		if (isset($this->request->named['define_table']) && isset($this->request->named['define_table_method'])) {
+			$this->loadTableQuery($this->request->named['define_table'], $this->request->named['define_table_method']);
+		}
+		else {
+			$this->loadQuery($id);
+		}
 		$this->handleFormSubmission();
 	}
 
@@ -46,7 +51,8 @@ class QueriesController extends AppController
 				'user_id' => $this->Auth->user('id'),
 				'label'   => null
 			),
-			'order'      => array('Query.modified DESC')
+			'order' => array('Query.modified DESC'),
+			'limit' => 500
 		)));
 	}
 
@@ -96,6 +102,30 @@ class QueriesController extends AppController
 		if ( ! $this->formWasSubmitted()) {
 			$this->request->data = $this->Query->read(null, $id);
 		}
+	}
+
+	protected function loadTableQuery($table, $method)
+	{
+		if ( ! in_array($method, array('SelectStar', 'SelectFields', 'Insert', 'Update', 'Delete'))) {
+			return FALSE;
+		}
+
+		if ($this->formWasSubmitted()) {
+			return FALSE;
+		}
+
+		$remote_connection = $this->Connection->getRemoteConnection();
+		$table_definition = new \SQLBoss\TableDefinition(array(
+			'remote_connection' => $remote_connection,
+			'table_name'        => $table
+		));
+
+		$method = "get{$method}Sql";
+		$this->request->data = array(
+			'Query' => array(
+				'query_sql' => $table_definition->$method()
+			)
+		);
 	}
 
 	protected function handleFormSubmission()

@@ -2,6 +2,7 @@
 $this->Html->script('/media/sqlboss/schema/js/index', array('inline' => false));
 $this->Html->script('/media/list/js/list', array('inline' => false));
 ?>
+<?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
 <div id="tables-list">
 	<p>
 		<?php echo $this->Form->input('tables-search', array(
