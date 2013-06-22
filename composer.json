@@ -4,12 +4,6 @@
 			"SQLBoss": "Lib/"
 		}
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/zacharyrankin/sql-formatter"
-		}
-	],
 	"config": {
 		"vendor-dir": "Vendor"
 	},

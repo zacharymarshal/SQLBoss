@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "699b68c5a0b7031b006864c71b3238b7",
+    "hash": "6b802b8c10cf255ac227ee46643ee040",
     "packages": [
         {
             "name": "doctrine/common",
@@ -142,22 +142,25 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zacharyrankin/sql-formatter.git",
-                "reference": "5bf3417cfb47fbdd2a539c1918519d96496f1c69"
+                "url": "https://github.com/jdorn/sql-formatter.git",
+                "reference": "3c7983d6d638233ea8e0e7705a3a8f3e4921ca75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zacharyrankin/sql-formatter/zipball/5bf3417cfb47fbdd2a539c1918519d96496f1c69",
-                "reference": "5bf3417cfb47fbdd2a539c1918519d96496f1c69",
+                "url": "https://api.github.com/repos/jdorn/sql-formatter/zipball/3c7983d6d638233ea8e0e7705a3a8f3e4921ca75",
+                "reference": "3c7983d6d638233ea8e0e7705a3a8f3e4921ca75",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -165,8 +168,9 @@
                     "lib"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL"
+                "MIT"
             ],
             "authors": [
                 {
@@ -181,10 +185,7 @@
                 "highlight",
                 "sql"
             ],
-            "support": {
-                "source": "https://github.com/zacharyrankin/sql-formatter/tree/master"
-            },
-            "time": "2013-06-21 22:21:34"
+            "time": "2013-06-13 03:56:09"
         }
     ],
     "packages-dev": [
