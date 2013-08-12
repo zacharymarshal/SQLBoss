@@ -68,7 +68,7 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
 			<?php while ($row = $statement['statement']->fetch(PDO::FETCH_NUM)) { ?>
 			<tr>
 				<?php foreach ($row as $column_index => $value): ?>
-					<td><?php echo ($value === NULL ? "<em>NULL</em>" : ($columns[$column_index]['pdo_type'] == PDO::PARAM_BOOL ? ($value ? "<em>TRUE</em>" : "<em>FALSE</em>") : $value)) ?></td>
+					<td><?php echo ($value === NULL ? "<em>NULL</em>" : ($columns[$column_index]['pdo_type'] == PDO::PARAM_BOOL ? ($value ? "<em>TRUE</em>" : "<em>FALSE</em>") : htmlentities($value))) ?></td>
 				<?php endforeach ?>
 			</tr>
 			<?php } ?>
