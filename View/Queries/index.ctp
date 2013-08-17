@@ -10,7 +10,8 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
 
 <div class="queries span12">
 	<?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
-	<?php echo $this->Form->create('Query'); ?>
+	<section id="run_query">
+	<?php echo $this->Form->create('Query', array('action' => false, 'id' => 'QueryIndexForm', 'url' => $this->request->here(false) . '#queries')); ?>
 	<?php echo $this->Form->input('query_sql', array('label' => false, 'class' => 'hidden', 'required' => false)); ?>
 	<div class="row-fluid">
 		<div id="query_sql_editor" class="span12"><?php echo isset($this->request->data['Query']) && isset($this->request->data['Query']['query_sql']) ? $this->request->data['Query']['query_sql'] : '' ?></div>
@@ -35,7 +36,13 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
 		<?php echo $this->Form->Submit('Run', array('class' => 'btn btn-success')) ?>
 	</div>
 	<?php echo $this->Form->end(); ?>
+	</section>
 
+<?php if (isset($query_errors) || isset($statements)): ?>
+	<p><a href="#run_query"><i class="icon-arrow-up"></i> Back to Query</a></p>
+<?php endif ?>
+
+<section id="queries">
 <?php if (isset($query_errors)): ?>
 	<?php foreach ($query_errors as $error): ?>
 	<div class="alert alert-error">
@@ -78,5 +85,5 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
 	<?php endif ?>
 	<?php endforeach ?>
 <?php endif ?>
-
+</section>
 </div>
