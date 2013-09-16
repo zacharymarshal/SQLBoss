@@ -29,6 +29,16 @@ class Connection extends AppModel
 		)
 	);
 
+	public static function decrypt($password)
+	{
+		return Security::cipher(base64_decode($password), Configure::read('Security.cipherSeed'));
+	}
+
+	public static function encrypt($password)
+	{
+		return base64_encode(Security::cipher($password, Configure::read('Security.cipherSeed')));
+	}
+
 	public function getRemoteConnection($connection)
 	{
 		$config = new Doctrine\DBAL\Configuration();
@@ -36,7 +46,7 @@ class Connection extends AppModel
 		return \Doctrine\DBAL\DriverManager::getConnection(array(
 			'dbname'        => $connection['database_name'] ?: 'postgres',
 			'user'          => $connection['username'],
-			'password'      => $connection['password'],
+			'password'      => self::decrypt($connection['password']),
 			'host'          => $connection['host'],
 			'driver'        => "pdo_{$connection['driver']}",
 			'driverOptions' => array(
@@ -62,6 +72,11 @@ class Connection extends AppModel
 				));
 		}
 		return true;
+	}
+
+	public function beforeSave()
+	{
+		$this->data['Connection']['password'] = self::encrypt($this->data['Connection']['password']);
 	}
 
 	public function isOwnedBy($connection_id, $user_id)
