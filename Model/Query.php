@@ -24,7 +24,7 @@ class Query extends AppModel
 
 	public function beforeSave(array $options = array())
 	{
-		$query_hash = $this->getQueryHash($this->data['Query']['query_sql']);
+		$query_hash = $this->getQueryHash($this->data['Query']['query_sql'] . $this->data['Query']['user_id']);
 		$this->data['Query']['query_hash'] = $query_hash;
 		return true;
 	}

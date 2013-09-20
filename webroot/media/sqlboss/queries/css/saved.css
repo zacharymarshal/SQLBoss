@@ -9,6 +9,9 @@
 .query {
 	margin: 20px 0;
 }
+.query:first-child {
+	margin-top: 0;
+}
 
 .query-sql_box {
 	margin-top: 10px;

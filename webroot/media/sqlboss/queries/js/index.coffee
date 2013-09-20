@@ -1,6 +1,14 @@
 $ =>
+  public_checkbox = $('#query-public').prev()
+  $('#query-public').addClass('btn-primary active') if public_checkbox.prop('checked')
+  
+  # Public checkbox
+  $('#query-public').click ->
+    $(@).toggleClass('btn-primary active')
+    public_checkbox.prop 'checked', ! public_checkbox.prop('checked')
+
   query_editor = ace.edit 'query_sql_editor'
-  query_editor.setTheme 'ace/theme/tomorrow_night'
+  query_editor.setTheme 'ace/theme/tomorrow'
   query_editor.setFontSize '14px'
   query_editor.setShowInvisibles true
   query_editor.setDisplayIndentGuides true

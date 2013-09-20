@@ -10,9 +10,20 @@ $this->Html->css('/media/sqlboss/queries/css/saved', null, array('inline' => fal
 $this->Html->script('/media/sqlboss/queries/js/saved', array('inline' => false));
 
 ?>
+
+<?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
+<div class="row-fluid">
+<div class="span2">
+<ul class="nav nav-tabs nav-stacked">
+	<li<?php if ($showing_all): ?> class="active"<?php endif ?>><?php echo $this->Html->link('Shared Queries', array('all') + $connection_parameters) ?></li>
+	<li<?php if ( ! $showing_all): ?> class="active"<?php endif ?>><?php echo $this->Html->link('Your Queries', $connection_parameters) ?></li>
+</ul>
+</div>
+<div class="span10">
 <?php foreach ($queries as $query): ?>
 <div class="query">
 	<div class="query-creator">
+		<?php $is_author = ($query['User']['id'] == $auth_user['id']) ?>
 		<?php echo $this->Html->link($query['User']['username'], array('controller' => 'users', 'action' => 'view', $query['User']['id'])); ?> / 
 		<?php echo $this->Html->link("query #{$query['Query']['id']}", array(
 			'controller' => 'queries',
@@ -24,6 +35,7 @@ $this->Html->script('/media/sqlboss/queries/js/saved', array('inline' => false))
 	<div class="query-name">
 		<?php echo $query['Query']['label'] ?>
 	</div>
+	<?php if ($is_author): ?>
 	<div class="query-delete">
 		<?php echo $this->Form->postLink('<i class="icon-trash"></i>', array(
 				'action' => 'delete',
@@ -36,6 +48,7 @@ $this->Html->script('/media/sqlboss/queries/js/saved', array('inline' => false))
 			__('Are you sure you want to delete %s?', $query['Query']['label'])
 		); ?>
 	</div>
+	<?php endif ?>
 	<div class="query-sql_box">
 		<a href="<?php echo $this->Html->url(array('controller' => 'queries', 'action' => 'index', $query['Query']['id']) + $connection_parameters); ?>" class="query-link_overlay">
 			<span class="link">View <strong>query #<?php echo $query['Query']['id'] ?></strong> <i class="icon-arrow-right"></i></span>
@@ -46,3 +59,5 @@ $this->Html->script('/media/sqlboss/queries/js/saved', array('inline' => false))
 	</div>
 </div>
 <?php endforeach ?>
+</div>
+</div>

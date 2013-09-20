@@ -56,15 +56,22 @@ class QueriesController extends AppController
 		)));
 	}
 
-	public function saved()
+	public function saved($all = false)
 	{
+		$conditions = array(
+			'label IS NOT NULL'
+		);
+		if ($all) {
+			$conditions['public'] = true;
+		}
+		else {
+			$conditions['user_id'] = $this->Auth->user('id');
+		}
 		$this->set('queries', $this->Query->find('all', array(
-			'conditions' => array(
-				'user_id' => $this->Auth->user('id'),
-				'label IS NOT NULL'
-			),
+			'conditions' => $conditions,
 			'order'      => array('Query.modified DESC')
 		)));
+		$this->set('showing_all', (bool) $all);
 	}
 
 	public function delete($id = null)
@@ -100,7 +107,12 @@ class QueriesController extends AppController
 			throw new NotFoundException(__('Invalid query'));
 		}
 		if ( ! $this->formWasSubmitted()) {
-			$this->request->data = $this->Query->read(null, $id);
+			$query = $this->Query->read(null, $id);
+			if ($query['Query']['user_id'] != $this->Auth->user('id')) {
+				$this->Query->id = null;
+				$query = array('Query' => array('query_sql' => $query['Query']['query_sql']));
+			}
+			$this->request->data = $query;
 		}
 	}
 
@@ -151,7 +163,8 @@ class QueriesController extends AppController
 			$query->id = $existing['Query']['id'];
 			$saved = $query->save(array(
 				'Query' => array(
-					'query_sql' => $this->request->data['Query']['query_sql']
+					'query_sql' => $this->request->data['Query']['query_sql'],
+					'public'    => $this->request->data['Query']['public']
 				)
 			));
 		} else {
@@ -160,7 +173,8 @@ class QueriesController extends AppController
 				'Query' => array(
 					'user_id'   => $this->Auth->user('id'),
 					'query_sql' => $this->request->data['Query']['query_sql'],
-					'label'     => $this->request->data['Query']['label']
+					'label'     => $this->request->data['Query']['label'],
+					'public'     => $this->request->data['Query']['public']
 				)
 			));
 		}
@@ -177,7 +191,7 @@ class QueriesController extends AppController
 
 	protected function runQuery()
 	{
-		$query_hash = $this->Query->getQueryHash($this->data['Query']['query_sql']);
+		$query_hash = $this->Query->getQueryHash($this->data['Query']['query_sql'] . $this->Auth->user('id'));
 		$exists = $this->Query->findByQueryHash($query_hash);
 		if ($exists) {
 			$this->Query->id = $exists['Query']['id'];

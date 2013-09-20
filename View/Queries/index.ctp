@@ -8,35 +8,43 @@ $this->Html->script('/media/sqlboss/queries/js/index', array('inline' => false))
 $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => false));
 ?>
 
-<div class="queries span12">
-	<?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
-	<section id="run_query">
-	<?php echo $this->Form->create('Query', array('action' => false, 'id' => 'QueryIndexForm', 'url' => $this->request->here(false) . '#queries')); ?>
-	<?php echo $this->Form->input('query_sql', array('label' => false, 'class' => 'hidden', 'required' => false)); ?>
-	<div class="row-fluid">
-		<div id="query_sql_editor" class="span12"><?php echo isset($this->request->data['Query']) && isset($this->request->data['Query']['query_sql']) ? $this->request->data['Query']['query_sql'] : '' ?></div>
+<?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
+<section id="run_query">
+<?php echo $this->Form->create('Query', array('action' => false, 'id' => 'QueryIndexForm', 'url' => $this->request->here(false) . '#queries', 'class' => 'form-inline')); ?>
+<?php echo $this->Form->input('query_sql', array('label' => false, 'div' => false, 'class' => 'hidden', 'style' => 'display: none;', 'required' => false)); ?>
+<div class="row-fluid">
+	<div id="query_sql_editor" class="span12"><?php echo isset($this->request->data['Query']) && isset($this->request->data['Query']['query_sql']) ? $this->request->data['Query']['query_sql'] : '' ?></div>
+</div>
+<div class="form-actions">
+	<?php echo $this->Form->Submit('Run', array(
+		'div'   => false,
+		'class' => 'btn btn-success'
+	)) ?>
+	&nbsp;or&nbsp;
+	<div class="input-append">
+		<?php echo $this->Form->input('label', array(
+			'type'        => 'text',
+			'label'       => false,
+			'div'         => false,
+			'class'       => 'input-xlarge',
+			'placeholder' => 'Name your query to be saved for later'
+		)); ?>
+		<?php echo $this->Form->input('public', array(
+			'type'  => 'checkbox',
+			'label' => false,
+			'div'   => false,
+			'style' => 'display: none',
+		)); ?>
+		<a href="javascript:;" class="btn" id="query-public" title="Make query public"><i class="icon-globe"></i></a>
 	</div>
-	<div class="controls" style="margin-top: 25px;">
-		<div class="input-append">
-			<?php echo $this->Form->input('label', array(
-				'type'        => 'text',
-				'label'       => false,
-				'div'         => false,
-				'class'       => 'span12',
-				'placeholder' => 'Name your query to be saved for later'
-			)); ?>
-			<?php echo $this->Form->Submit('Save Query', array(
-				'name'  => 'save',
-				'class' => 'btn',
-				'div'   => false
-			)) ?>
-		</div>
-	</div>
-	<div class="form-actions">
-		<?php echo $this->Form->Submit('Run', array('class' => 'btn btn-success')) ?>
-	</div>
-	<?php echo $this->Form->end(); ?>
-	</section>
+	<?php echo $this->Form->Submit('Save Query', array(
+		'name'  => 'save',
+		'class' => 'btn',
+		'div'   => false
+	)) ?>
+</div>
+<?php echo $this->Form->end(); ?>
+</section>
 
 <?php if (isset($query_errors) || isset($statements)): ?>
 	<p><a href="#run_query"><i class="icon-arrow-up"></i> Back to Query</a></p>
