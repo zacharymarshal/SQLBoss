@@ -163,6 +163,7 @@ class QueriesController extends AppController
 			$query->id = $existing['Query']['id'];
 			$saved = $query->save(array(
 				'Query' => array(
+					'user_id'   => $this->Auth->user('id'),
 					'query_sql' => $this->request->data['Query']['query_sql'],
 					'public'    => $this->request->data['Query']['public']
 				)
