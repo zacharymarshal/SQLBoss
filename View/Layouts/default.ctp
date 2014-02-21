@@ -7,7 +7,6 @@
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
-		echo $this->Html->meta('icon', $this->Html->url('/favicon.png'));
 		echo $this->Html->css('/media/twitter-bootstrap/css/bootstrap.min');
 		echo $this->Html->css('/media/twitter-bootstrap/css/bootstrap-responsive.min');
 		echo $this->Html->css('/media/font-awesome/css/font-awesome.min');
