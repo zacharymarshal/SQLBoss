@@ -7,7 +7,7 @@ class ConnectionComponent extends Component
     protected $controller;
     protected $connection;
 
-    public function startup($controller)
+    public function startup(Controller $controller)
     {
         $this->controller = $controller;
         if ( ! $this->getConnection($controller) && get_class($controller) != 'DatabasesController') {
@@ -38,18 +38,21 @@ class ConnectionComponent extends Component
             $connection = new Connection();
             $connection_id = $this->controller->request->params['connection_id'];
             $connection->read(null, $connection_id);
-            if ( ! $connection->data['Connection']['database_name']) {
+            if (! $connection->data['Connection']['database_name']) {
                 $connection->data['Connection']['database_name'] = $this->controller->request->params['database'];
             }
             $this->connection = $connection;
+
             return $this->connection;
         }
+
         return false;
     }
 
     public function getRemoteConnection()
     {
         $connection = $this->getConnection();
+
         return $connection->getRemoteConnection($connection->data['Connection']);
     }
 }

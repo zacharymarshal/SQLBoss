@@ -43,6 +43,7 @@ class Connection extends AppModel
     {
         $config = new Doctrine\DBAL\Configuration();
         $config->setSQLLogger(new Doctrine\DBAL\Logging\DebugStack());
+
         return \Doctrine\DBAL\DriverManager::getConnection(array(
             'dbname'        => $connection['database_name'] ?: 'postgres',
             'user'          => $connection['username'],
@@ -56,7 +57,7 @@ class Connection extends AppModel
         ), $config);
     }
 
-    public function beforeValidate()
+    public function beforeValidate($options = array())
     {
         if ($this->data['Connection']['driver'] == 'pgsql') {
             $this->validator()
@@ -71,10 +72,11 @@ class Connection extends AppModel
                     'message' => 'SQLite database name is required'
                 ));
         }
+
         return true;
     }
 
-    public function beforeSave()
+    public function beforeSave($options = array())
     {
         $this->data['Connection']['password'] = self::encrypt($this->data['Connection']['password']);
     }
