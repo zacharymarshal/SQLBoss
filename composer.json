@@ -1,14 +1,15 @@
 {
-	"autoload": {
-		"psr-0": {
-			"SQLBoss": "Lib/"
-		}
-	},
-	"config": {
-		"vendor-dir": "Vendor"
-	},
-	"require": {
-		"jdorn/sql-formatter": "dev-master",
-		"doctrine/dbal":       "2.3.3"
-	}
+  "autoload": {
+    "psr-0": {
+      "SQLBoss": "Lib/"
+    }
+  },
+  "config": {
+    "vendor-dir": "Vendor"
+  },
+  "require": {
+    "cakephp/cakephp": "2.*",
+    "jdorn/sql-formatter": "1.*",
+    "doctrine/dbal": "2.*"
+  }
 }
