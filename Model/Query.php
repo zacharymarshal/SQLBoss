@@ -22,10 +22,11 @@ class Query extends AppModel
         return md5($query_sql);
     }
 
-    public function beforeSave(array $options = array())
+    public function beforeSave($options = array())
     {
         $query_hash = $this->getQueryHash($this->data['Query']['query_sql'] . $this->data['Query']['user_id']);
         $this->data['Query']['query_hash'] = $query_hash;
+
         return true;
     }
 
