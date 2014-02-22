@@ -44,6 +44,7 @@ class AppController extends Controller
             return true;
         }
         $this->Session->setFlash('Not authorized.');
+
         return false;
     }
 }
