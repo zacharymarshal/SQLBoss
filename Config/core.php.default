@@ -2,6 +2,8 @@
 
 Configure::write('debug', 0);
 
+Configure::write('App.baseUrl', env('SCRIPT_NAME'));
+
 Configure::write('Error', array(
     'handler' => 'ErrorHandler::handleError',
     'level'   => E_ALL & ~E_DEPRECATED,
