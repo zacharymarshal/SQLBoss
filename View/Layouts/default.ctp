@@ -11,7 +11,6 @@
     echo $this->Html->css('/media/bower_components/bootstrap/dist/css/bootstrap.min.css');
     echo $this->Html->css('/media/bower_components/font-awesome/css/font-awesome.min.css');
 
-    echo $this->Html->script('http://requirejs.org/docs/release/2.1.11/minified/require.js', array('inline' => true));
     echo $this->Html->script('/media/bower_components/jquery/dist/jquery.min.js');
     echo $this->Html->script('/media/bower_components/bootstrap/dist/js/bootstrap.min.js');
 
