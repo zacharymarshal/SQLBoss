@@ -57,7 +57,7 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
   <hr>
 
   <?php if (isset($query_errors) || isset($statements)): ?>
-    <p><a href="#run_query"><i class="icon-arrow-up"></i> Back to Query</a></p>
+    <p><a href="#run_query"><i class="fa fa-arrow-up"></i> Back to Query</a></p>
   <?php endif ?>
 
   <div id="queries">

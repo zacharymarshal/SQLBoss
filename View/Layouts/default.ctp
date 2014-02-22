@@ -25,9 +25,7 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sqlboss-navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span class="fa fa-bars"></span>
           </button>
           <?php echo $this->Html->link('SQLBoss', array('controller' => 'pages'), array(
             'class' => 'navbar-brand'

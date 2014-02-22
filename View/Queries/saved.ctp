@@ -37,7 +37,7 @@ $this->Html->script('/media/sqlboss/queries/js/saved', array('inline' => false))
           </div>
           <?php if ($is_author): ?>
             <div class="query-delete">
-              <?php echo $this->Form->postLink('<i class="icon-trash"></i>', array(
+              <?php echo $this->Form->postLink('<i class="fa fa-trash-o"></i>', array(
                 'action' => 'delete',
                 $query['Query']['id']
                 ) + $connection_parameters,
@@ -51,7 +51,7 @@ $this->Html->script('/media/sqlboss/queries/js/saved', array('inline' => false))
           <?php endif ?>
           <div class="query-sql_box">
             <a href="<?php echo $this->Html->url(array('controller' => 'queries', 'action' => 'index', $query['Query']['id']) + $connection_parameters); ?>" class="query-link_overlay">
-              <span class="link">View <strong>query #<?php echo $query['Query']['id'] ?></strong> <i class="icon-arrow-right"></i></span>
+              <span class="link">View <strong>query #<?php echo $query['Query']['id'] ?></strong> <i class="fa fa-arrow-right"></i></span>
             </a>
             <div class="query-sql_data">
               <pre style="tab-stops: dotted 3in"><code class="language-sql"><?php echo str_replace("\t", '    ', $this->Text->lineLimiter($query['Query']['query_sql'])) ?></code></pre>
