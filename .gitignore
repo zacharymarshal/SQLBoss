@@ -11,3 +11,4 @@ tmp/cache/views/*
 tmp/logs/*
 tmp/sessions/*
 tmp/tests/*
+webroot/media/bower_components/*

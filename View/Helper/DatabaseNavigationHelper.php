@@ -8,7 +8,7 @@ class DatabaseNavigationHelper extends AppHelper
 
     public function create($connection, $connection_parameters)
     {
-        if ( ! $connection) {
+        if (! $connection) {
             return '';
         }
 
@@ -18,10 +18,11 @@ class DatabaseNavigationHelper extends AppHelper
         ) + $connection_parameters);
         $html = "
         <ul class=\"breadcrumb\">
-            <li>{$databases_link} <span class=\"divider\">/</span></li>
-            <li><abbr title=\"{$connection['Connection']['username']}@{$connection['Connection']['host']}\">{$connection['Connection']['label']}</abbr> <span class=\"divider\">/</span></li>
+            <li>{$databases_link} </li>
+            <li><abbr title=\"{$connection['Connection']['username']}@{$connection['Connection']['host']}\">{$connection['Connection']['label']}</abbr> </li>
             <li>{$connection['Connection']['database_name']}</li>
         </ul>";
+
         return $html;
     }
 }

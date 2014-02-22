@@ -1,3 +1,7 @@
 #query_sql_editor {
-	height: 440px;
+  height: 440px;
+}
+#query-public {
+  border-radius: 0;
+  border-left: 0;
 }

@@ -1,4 +1,4 @@
-<div class="actions span2">
+<div class="actions col-sm-2 col-md-2">
   <ul class="nav nav-tabs nav-stacked">
     <li>
       <?php echo $this->Html->link(__('List Connections'), array(
@@ -26,7 +26,7 @@
     </li>
   </ul>
 </div>
-<div class="connections view span10">
+<div class="connections view col-sm-10 col-md-10">
     <h2><?php  echo h($connection['Connection']['label']); ?></h2>
     <?php $driver = $connection['Connection']['driver'] ?>
     <?php echo $this->element("view_connection_{$driver}", array(
