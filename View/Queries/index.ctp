@@ -34,13 +34,13 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
           'placeholder' => 'Name your query to be saved for later'
         )); ?>
         <span class="input-group-btn">
-          <a href="javascript:;" class="btn btn-default" id="query-public" title="Make query public"><i class="fa fa-globe"></i></a>
           <?php echo $this->Form->input('public', array(
             'type'  => 'checkbox',
             'label' => false,
             'div'   => false,
             'style' => 'display: none',
           )); ?>
+          <a href="javascript:;" class="btn btn-default" id="query-public" title="Make query public"><i class="fa fa-globe"></i></a>
         </span>
         <span class="input-group-btn">
           <?php echo $this->Form->Submit('Save Query', array(
