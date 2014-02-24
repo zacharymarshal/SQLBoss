@@ -5,7 +5,7 @@ $this->Html->script('/media/sqlboss/databases/js/index', array('inline' => false
 <div class="row">
   <div class="col-sm-12 col-md-12">
     <?php foreach ($errors as $error): ?>
-      <div class="alert alert-error">
+      <div class="alert alert-danger">
         <strong><?php echo $error['message'] ?></strong>: <em><?php echo $error['exception'] ?></em>
       </div>
     <?php endforeach ?>

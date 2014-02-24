@@ -63,7 +63,7 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
   <div id="queries">
     <?php if (isset($query_errors)): ?>
       <?php foreach ($query_errors as $error): ?>
-        <div class="alert alert-error">
+        <div class="alert alert-danger">
           <?php echo $error ?>
         </div>
       <?php endforeach ?>
