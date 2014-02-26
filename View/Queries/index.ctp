@@ -75,7 +75,7 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
         <h4 style="font-weight: normal">
           <strong><?php echo $count; ?></strong> record(s) in 
           <strong><?php echo round($statement['execution_time'], 3) ?></strong> seconds 
-          <small class="muted"><?php echo $this->Text->ellipsize($statement['query'], 100, 0.5) ?></small>
+          <small class="text-muted"><?php echo $this->Text->ellipsize($statement['query'], 100, 0.5) ?></small>
         </h4>
         <?php if ($count > 0): ?>
           <div style="overflow-x: auto;">

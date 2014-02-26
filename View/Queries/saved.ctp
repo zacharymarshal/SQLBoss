@@ -31,7 +31,7 @@ $this->Html->script('/media/sqlboss/queries/js/saved', array('inline' => false))
             $query['Query']['id']
             ) + $connection_parameters) ?>
           </div>
-          <div class="query-created"><small class="muted">Created <?php echo $this->Time->niceShort($query['Query']['created']) ?></small></div>
+          <div class="query-created"><small class="text-muted">Created <?php echo $this->Time->niceShort($query['Query']['created']) ?></small></div>
           <div class="query-name">
             <?php echo $query['Query']['label'] ?>
           </div>

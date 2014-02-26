@@ -27,7 +27,7 @@ $this->Html->script('/media/sqlboss/databases/js/index', array('inline' => false
     <ul class="nav nav-pills nav-stacked">
       <?php foreach ($databases as $database): ?>
         <li class="database" data-database_name="<?php echo "{$database['name']} {$database['Connection']['label']}" ?> " data-connection_id="<?php echo $database['Connection']['id'] ?>">
-          <?php echo $this->Html->link($database['name'] . " <small class=\"muted\">{$database['Connection']['label']} </small>", array(
+          <?php echo $this->Html->link($database['name'] . " <small class=\"text-muted\">{$database['Connection']['label']} </small>", array(
             'controller'    => 'queries',
             'connection_id' => $database['Connection']['id'],
             'database'      => $database['id'],

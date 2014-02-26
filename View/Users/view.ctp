@@ -13,7 +13,7 @@ $this->Html->css('/media/sqlboss/users/css/view', null, array('inline' => false)
   <div class="col-xs-10 col-md-10">
     <span class="username"><?php echo h($user['User']['username']) ?></span>
     <?php echo h($user['User']['access_role']) ?><br/>
-    <span class="muted"><i class="fa fa-clock-o"></i> Created on </span><?php echo $this->Time->niceShort($user['User']['created']) ?>
+    <span class="text-muted"><i class="fa fa-clock-o"></i> Created on </span><?php echo $this->Time->niceShort($user['User']['created']) ?>
     <hr>
     <h4>Connections</h4>
     <table class="table table-condensed table-striped table-bordered">
