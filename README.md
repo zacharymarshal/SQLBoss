@@ -6,9 +6,9 @@ SQLBoss2
 
 ### Install Tools
 
-Install [Composer](http://getcomposer.org)
-Install [Bower](http://bower.io/#installing-bower)
-Install PostgreSQL, if you are using a mac I recommend [Postgres.app](http://postgresapp.com/)
+#### Install [Composer](http://getcomposer.org)
+#### Install [Bower](http://bower.io/#installing-bower)
+#### Install PostgreSQL, if you are using a mac I recommend [Postgres.app](http://postgresapp.com/)
 
 ### Run some commands
 
