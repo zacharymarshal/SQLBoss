@@ -18,7 +18,7 @@
   "dependencies": {
     "jquery": "jquery#2",
     "font-awesome": "font-awesome#4",
-    "highlight": "highlight#7",
+    "highlightjs": "highlightjs#8",
     "ace-builds": "ace-builds#1",
     "bootstrap": "bootstrap#3"
   }
