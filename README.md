@@ -58,3 +58,28 @@ Go to ```/users/add``` and add your default admin users. Remove the beforeFilter
 ```
 sudo Vendor/cakephp/cakephp/lib/Cake/Console/cake server -p 8888
 ```
+
+### Run using apache
+
+To run SQLBoss using apache you can add a .htaccess file inside ```webroot/```
+
+```
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # RewriteBase /path/to/SQLBoss2
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+```
+
+If you make the code publically accessible (not recommended) then you can put a .htaccess file in the root directory as well
+
+```
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    # RewriteBase /path/to/SQLBoss2
+    RewriteRule    ^$    webroot/    [L]
+    RewriteRule    (.*) webroot/$1    [L]
+</IfModule>
+```
