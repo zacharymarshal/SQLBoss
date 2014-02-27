@@ -1,16 +1,47 @@
 SQLBoss2
 ========
 
+
+## Setup Local Environment 
+
+### Install Tools
+
+Install [Composer](http://getcomposer.org)
+Install [Bower](http://bower.io/#installing-bower)
+Install PostgreSQL, if you are using a mac I recommend [Postgres.app](http://postgresapp.com/)
+
+### Run some commands
+
 ```
+composer install
+bower install
 cp Config/database.php.default Config/database.php
 cp Config/core.php.default Config/core.php
-# Create your database and Update database.php
-Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create
-Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sessions
-bower install
 ```
 
-Go into UsersController and add the ability to add a new user:
+### Configure
+
+Create a PostgreSQL database.
+
+```
+createdb --lc-collate=C -T template0 -U your_username -h localhost -W sqlboss
+```
+
+Configure your database to point to the proper place in ```Config/database.php```
+
+Configure the rest of the app in ```Config/core.php```
+
+### Create the database schema using CakePHP migrations
+
+```
+Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create
+Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sessions
+```
+
+### Setup initial system administrator account
+
+Go into ```UsersController``` and add the ability to add a new user:
+
 
 ```
 public function beforeFilter()
@@ -22,7 +53,8 @@ public function beforeFilter()
 
 Go to ```/users/add``` and add your default admin users. Remove the beforeFilter() after you are done.
 
-Run local server
+### Run a local server using PHP 5.4 built in webserver
+
 ```
 sudo Vendor/cakephp/cakephp/lib/Cake/Console/cake server -p 8888
 ```
