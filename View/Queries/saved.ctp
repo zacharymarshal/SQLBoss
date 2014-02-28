@@ -1,7 +1,7 @@
 <?php
 // Highlight.js https://github.com/isagalaev/highlight.js
-$this->Html->script('/media/highlight_js/highlight.pack', array('inline' => false));
-$this->Html->css('/media/highlight_js/styles/tomorrow.css', null, array('inline' => false));
+$this->Html->script('/media/bower_components/highlightjs/highlight.pack', array('inline' => false));
+$this->Html->css('/media/bower_components/highlightjs/styles/tomorrow.css', null, array('inline' => false));
 $this->Html->script('/media/sqlboss/queries/js/highlighter', array('inline' => false));
 $this->Html->css('/media/sqlboss/queries/css/highlighter', null, array('inline' => false));
 
