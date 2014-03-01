@@ -12,9 +12,9 @@ class QueryRunner
 
     public function __construct(array $options)
     {
-        $remote_connection = NULL;
-        $in_transaction = TRUE;
-        $multiple_queries = TRUE;
+        $remote_connection = null;
+        $in_transaction = true;
+        $multiple_queries = true;
         $sql = '';
         extract($options, EXTR_IF_EXISTS);
         $this->remote_connection = $remote_connection;
@@ -25,8 +25,7 @@ class QueryRunner
 
     public function runQueries()
     {
-        $params = $this->getParameters();
-        if ($this->multiple_queries === TRUE) {
+        if ($this->multiple_queries === true) {
             $queries = \SqlFormatter::splitQuery($this->sql);
         } else {
             $queries = $this->sql;
@@ -37,7 +36,7 @@ class QueryRunner
         foreach ($queries as $query) {
             try {
                 $statements[] = array(
-                    'statement'      => $this->remote_connection->executeQuery($query, $params),
+                    'statement'      => $this->remote_connection->executeQuery($query),
                     'query'          => $logger->queries[$logger->currentQuery]['sql'],
                     'execution_time' => $logger->queries[$logger->currentQuery]['executionMS'],
                 );
@@ -45,23 +44,12 @@ class QueryRunner
                 $this->errors[] = $e->getMessage();
             }
         }
+
         return $statements;
     }
 
     public function getErrors()
     {
         return $this->errors;
-    }
-
-    protected function getParameters()
-    {
-        $params = array();
-        preg_match_all("/-- (.*) = (.*)/", $this->sql, $parsed_parameters, PREG_SET_ORDER);
-        if ($parsed_parameters) {
-            foreach ($parsed_parameters as $parsed) {
-                $params[$parsed[1]] = $parsed[2];
-            }
-        }
-        return $params;
     }
 }
