@@ -2,7 +2,7 @@
 
 namespace SQLBoss;
 
-use \Cache;
+use SQLBoss\Cache\Cacher;
 use \Hash;
 use \Connection;
 
@@ -12,13 +12,15 @@ class DatabaseList
     protected $connections;
     protected $errors = array();
     protected $databases;
+    protected $cacher;
     protected $reset_cache;
 
-    public function __construct($user_id, Connection $connection, $reset_cache = false)
+    public function __construct($user_id, Connection $connection, Cacher $cacher, $reset_cache = false)
     {
         $this->user_id = $user_id;
         $this->connection = $connection;
         $this->reset_cache = $reset_cache;
+        $this->cacher = $cacher;
     }
 
     public function getConnections()
@@ -67,9 +69,9 @@ class DatabaseList
     {
         $cache_key = "databases_for_connection_{$connection['id']}";
         if ($this->reset_cache) {
-            Cache::delete($cache_key);
+            $this->cacher->delete($cache_key);
         }
-        if ($databases = Cache::read($cache_key)) {
+        if ($databases = $this->cacher->read($cache_key)) {
             return $databases;
         }
         $db = $this->connection->getRemoteConnection($connection);
@@ -84,7 +86,7 @@ class DatabaseList
                 'Connection' => $connection
             );
         }
-        Cache::write($cache_key, $built_out_databases);
+        $this->cacher->write($cache_key, $built_out_databases);
 
         return $built_out_databases;
     }

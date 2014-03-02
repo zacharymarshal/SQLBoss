@@ -23,6 +23,7 @@ class DatabasesController extends AppController
         $database_list = new SQLBoss\DatabaseList(
             $this->Auth->user('id'),
             new Connection,
+            new SQLBoss\Cache\Adapter\CakePhp,
             (isset($this->request->query['reset_cache']))
         );
         $this->set('connections', $database_list->getConnections());
