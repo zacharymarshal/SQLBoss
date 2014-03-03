@@ -46,7 +46,10 @@ class DatabaseList
         foreach ($this->getConnections() as $connection) {
             $connection = $connection['Connection'];
             try {
-                $this->databases = array_merge($this->getDatabasesForConnection($connection), $this->databases);
+                $this->databases = array_merge(
+                    $this->getDatabasesForConnection($connection),
+                    $this->databases
+                );
             } catch (\PDOException $e) {
                 $this->errors[] = array(
                     'message'   => "Error connecting to {$connection['label']}",
