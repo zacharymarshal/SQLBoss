@@ -3,7 +3,6 @@
 namespace SQLBoss;
 
 use SQLBoss\Cache\Cacher;
-use \Hash;
 use \Connection;
 
 class DatabaseList
@@ -55,7 +54,10 @@ class DatabaseList
                 );
             }
         }
-        $this->databases = Hash::sort($this->databases, '{n}.name', 'asc');
+
+        usort($this->databases, function ($db_a, $db_b) {
+            return strcmp($db_a['name'], $db_b['name']);
+        });
 
         return $this->databases;
     }
