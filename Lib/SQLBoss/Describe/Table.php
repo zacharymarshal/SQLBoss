@@ -29,7 +29,7 @@ class Table
         $indexes = $this->queries->getIndexes($oid);
 
         foreach ($indexes as &$index) {
-            $definition = array("\"{$index['relname']}\"");
+            $definition = array();
             if ($index['contype'] == 'x') {
                 $definition[] = $index['pg_get_constraintdef'];
             } else {
@@ -104,9 +104,9 @@ class Table
 
         foreach ($triggers as &$trigger) {
             $trigger_def = $trigger['pg_get_triggerdef'];
-            $trigger_pos = strstr($trigger_def, " TRIGGER ");
+            $trigger_pos = strstr($trigger_def, " {$trigger['tgname']} ");
             if ($trigger_pos) {
-                $trigger_def = str_replace(" TRIGGER ", '', $trigger_pos);
+                $trigger_def = str_replace(" {$trigger['tgname']} ", '', $trigger_pos);
             }
             $trigger['definition'] = $trigger_def;
         }

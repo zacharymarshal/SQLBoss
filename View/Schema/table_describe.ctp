@@ -1,11 +1,3 @@
-<?php
-// Highlight.js https://github.com/isagalaev/highlight.js
-$this->Html->script('/media/bower_components/highlightjs/highlight.pack', array('inline' => false));
-$this->Html->css('/media/bower_components/highlightjs/styles/tomorrow.css', null, array('inline' => false));
-$this->Html->script('/media/sqlboss/queries/js/highlighter', array('inline' => false));
-$this->Html->css('/media/sqlboss/queries/css/highlighter', null, array('inline' => false));
-
-?>
 <?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
 <div class="row">
   <div class="actions col-xs-2 col-ms-2">
@@ -43,39 +35,99 @@ $this->Html->css('/media/sqlboss/queries/css/highlighter', null, array('inline' 
       </tbody>
     </table>
     <h3>Indexes</h3>
-    <ul>
-    <?php foreach ($description->getIndexes() as $index): ?>
-      <li><?php echo $index['definition'] ?></li>
-    <?php endforeach ?>
-    </ul>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($description->getIndexes() as $index): ?>
+        <tr>
+          <td><?php echo $index['relname'] ?></td>
+          <td><?php echo $index['definition'] ?></td>
+        </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
     <h3>Check constraints</h3>
-    <ul>
-    <?php foreach ($description->getChecks() as $check): ?>
-      <li><?php echo "\"{$check['conname']}\"" ?> <?php echo $check['condef'] ?></li>
-    <?php endforeach ?>
-    </ul>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($description->getChecks() as $check): ?>
+        <tr>
+          <td><?php echo $check['conname'] ?></td>
+          <td><?php echo $check['condef'] ?></td>
+        </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
     <h3>Foreign-key constraints</h3>
-    <ul>
-    <?php foreach ($description->getForeignKeys() as $fk): ?>
-      <li><?php echo "\"{$fk['conname']}\"" ?> <?php echo $fk['condef'] ?></li>
-    <?php endforeach ?>
-    </ul>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($description->getForeignKeys() as $fk): ?>
+        <tr>
+          <td><?php echo $fk['conname'] ?></td>
+          <td><?php echo $fk['condef'] ?></td>
+        </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
     <h3>Triggers</h3>
-    <ul>
-    <?php foreach ($description->getTriggers() as $trigger): ?>
-      <li>
-        <?php if ($trigger['tgenabled'] == 'D'): ?>
-          <span class="label label-warning">Disabled</span>
-        <?php endif ?>
-        <?php echo $trigger['definition'] ?>
-      </li>
-    <?php endforeach ?>
-    </ul>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Enabled?</th>
+          <th>Name</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($description->getTriggers() as $trigger): ?>
+        <tr>
+          <td>
+            <?php if ($trigger['tgenabled'] == 'D'): ?>
+              <span class="label label-warning">Disabled</span>
+            <?php elseif ($trigger['tgenabled'] == 'O'): ?>
+              <span class="label label-success">Enabled</span>
+            <?php endif ?>
+          </td>
+          <td><?php echo $trigger['tgname'] ?></td>
+          <td><?php echo $trigger['definition'] ?></td>
+        </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
     <h3>Referenced by</h3>
-    <ul>
-    <?php foreach ($description->getReferences() as $ref): ?>
-      <li><?php echo "TABLE \"{$ref['ref_table']}\" CONSTRAINT \"{$ref['conname']}\" {$ref['condef']}" ?></li>
-    <?php endforeach ?>
-    </ul>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Table</th>
+          <th>Constraint</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($description->getReferences() as $ref): ?>
+        <tr>
+          <td><?php echo $ref['ref_table'] ?></td>
+          <td><?php echo $ref['conname'] ?></td>
+          <td><?php echo $ref['condef'] ?></td>
+        </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -148,7 +148,7 @@ SELECT
 FROM pg_catalog.pg_constraint c
 WHERE c.confrelid = :oid
     AND c.contype = 'f'
-ORDER BY 1
+ORDER BY ref_table, conname
 SQL;
 
         return $this->db->fetchAll($sql, array('oid' => $oid));
