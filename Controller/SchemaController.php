@@ -14,9 +14,27 @@ class SchemaController extends AppController
         $this->set('tables', $remote_connection->getSchemaManager()->listTableNames());
     }
 
+    public function tableDescribe()
+    {
+        $remote_connection = $this->Connection->getRemoteConnection();
+
+        $table_queries = new \SQLBoss\Describe\TableQueries($remote_connection);
+        if (strstr($this->params['pass'][0], '.')) {
+            list($schema, $table) = explode('.', $this->params['pass'][0]);
+        } else {
+            $table = $this->params['pass'][0];
+            $schema = 'public';
+        }
+        
+        $description = new \SQLBoss\Describe\Table($schema, $table, $table_queries);
+        $this->set('table_name', $this->params['pass'][0]);
+        $this->set('description', $description);
+    }
+
     public function tableDefinition()
     {
         $remote_connection = $this->Connection->getRemoteConnection();
+
         $table_definition = new \SQLBoss\TableDefinition(array(
             'remote_connection' => $remote_connection,
             'table_name'        => $this->params['pass'][0]

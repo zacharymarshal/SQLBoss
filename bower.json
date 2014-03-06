@@ -20,6 +20,8 @@
     "font-awesome": "font-awesome#4",
     "highlightjs": "highlightjs#8",
     "ace-builds": "ace-builds#1",
-    "bootstrap": "bootstrap#3"
+    "bootstrap": "bootstrap#3",
+    "floatThead": "floatThead#1",
+    "rainbow": "rainbow#1"
   }
 }
