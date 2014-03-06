@@ -16,7 +16,7 @@ $this->Html->script('/media/list/js/list', array('inline' => false));
   <?php sort($tables) ?>
   <?php foreach ($tables as $table_name): ?>
     <li><?php echo $this->Html->link($table_name, array(
-      'action' => 'tableDefinition',
+      'action' => 'tableDescribe',
       $table_name
     ) + $connection_parameters, array('class' => 'sqlboss-table')) ?></li>
   <?php endforeach ?>
