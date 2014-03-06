@@ -1,0 +1,61 @@
+/**
+ * Tomorrow theme
+ *
+ * @author Chris Kempson
+ * @author skim
+ * @version 1.0.0
+ */
+pre, code, pre code {
+    background-color: #ffffff;
+    color: #4d4d4c;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+    background-color: none;
+    border: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+pre.nowrap {
+    word-break: keep-all;
+    word-wrap: normal;
+    white-space: nowrap;
+}
+
+pre, code {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+pre .comment {
+    color: #8e908c;
+}
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #c82829; /* red */
+}
+
+pre .constant.numeric, pre .constant.language, pre .constant.hex-color, pre .keyword.unit {
+    color: #f5871f; /* orange */
+}
+
+pre .constant, pre .entity, pre .entity.class, pre .support {
+    color: #eab700; /* yellow */
+}
+
+pre .constant.symbol, pre .string {
+    color: #718c00; /* green */
+}
+
+pre .entity.function, pre .support.css-property, pre .selector {
+    color: #4271ae; /* blue */
+}
+
+pre .keyword, pre .storage {
+    color: #8959a8; /* purple */
+}
