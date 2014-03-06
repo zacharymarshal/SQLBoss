@@ -14,9 +14,8 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
 ?>
 <?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
 <div class="row">
-  <div class="actions col-xs-2 col-ms-2">
+  <div class="actions col-sm-2">
     <ul class="nav nav-pills nav-stacked">
-      <li class="active"><?php echo $this->Html->link("Definition: {$table_name}", array($table_name) + $connection_parameters); ?></li>
       <li><?php echo $this->Html->link(__('SELECT *'), array('controller' => 'queries', 'define_table' => $table_name, 'define_table_method' => 'SelectStar') + $connection_parameters); ?></li>
       <li><?php echo $this->Html->link(__('SELECT Fields'), array('controller' => 'queries', 'define_table' => $table_name, 'define_table_method' => 'SelectFields') + $connection_parameters); ?></li>
       <li><?php echo $this->Html->link(__('INSERT'), array('controller' => 'queries', 'define_table' => $table_name, 'define_table_method' => 'Insert') + $connection_parameters); ?></li>
@@ -24,7 +23,8 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
       <li><?php echo $this->Html->link(__('DELETE'), array('controller' => 'queries', 'define_table' => $table_name, 'define_table_method' => 'Delete') + $connection_parameters); ?></li>
     </ul>
   </div>
-  <div class="col-xs-10 col-ms-10">
+  <div class="col-sm-10">
+    <h2>Table: <?php echo $table_name ?></h2>
     <h3>Columns</h3>
     <table class="table table-condensed table-float">
       <thead>
@@ -103,7 +103,7 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
     <table class="table table-condensed table-float">
       <thead>
         <tr>
-          <th>Enabled?</th>
+          <th>Enabled</th>
           <th>Name</th>
           <th>Definition</th>
         </tr>
