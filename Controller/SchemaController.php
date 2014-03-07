@@ -28,7 +28,12 @@ class SchemaController extends AppController
         
         $description = new \SQLBoss\Describe\Table($schema, $table, $table_queries);
         $this->set('table_name', $this->params['pass'][0]);
-        $this->set('description', $description);
+        $this->set('columns', $description->getFields());
+        $this->set('indexes', $description->getIndexes());
+        $this->set('foreign_keys', $description->getForeignKeys());
+        $this->set('triggers', $description->getTriggers());
+        $this->set('references', $description->getReferences());
+        $this->set('checks', $description->getChecks());
     }
 
     public function tableDefinition()

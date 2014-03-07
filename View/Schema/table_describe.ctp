@@ -36,16 +36,23 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
         </tr>
       </thead>
       <tbody>
-      <?php foreach ($description->getFields() as $field): ?>
+        <?php if (!$columns): ?>
         <tr>
-          <td><?php echo $field['column'] ?></td>
-          <td><pre data-language="generic" class="nowrap"><?php echo $field['type'] ?></pre></td>
-          <td>
-            <pre data-language="generic" class="nowrap"><?php echo ($field['not_null'] ? "not null" : '') ?> <?php echo $field['default'] ?></pre>
+          <td colspan="3">
+            <em>No columns</em>
           </td>
-          <td><?php echo $field['comment'] ?></td>
         </tr>
-      <?php endforeach ?>
+        <?php endif ?>
+        <?php foreach ($columns as $column): ?>
+        <tr>
+          <td><?php echo $column['column'] ?></td>
+          <td><pre data-language="generic" class="nowrap"><?php echo $column['type'] ?></pre></td>
+          <td>
+            <pre data-language="generic" class="nowrap"><?php echo ($column['not_null'] ? "not null" : '') ?> <?php echo $column['default'] ?></pre>
+          </td>
+          <td><?php echo $column['comment'] ?></td>
+        </tr>
+        <?php endforeach ?>
       </tbody>
     </table>
     <h3>Indexes</h3>
@@ -57,7 +64,14 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($description->getIndexes() as $index): ?>
+        <?php if (!$indexes): ?>
+        <tr>
+          <td colspan="3">
+            <em>No indexes</em>
+          </td>
+        </tr>
+        <?php endif ?>
+        <?php foreach ($indexes as $index): ?>
         <tr>
           <td><?php echo $index['relname'] ?></td>
           <td><pre data-language="generic"><?php echo $index['definition'] ?></pre></td>
@@ -74,7 +88,14 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($description->getChecks() as $check): ?>
+        <?php if (!$checks): ?>
+        <tr>
+          <td colspan="3">
+            <em>No check constraints</em>
+          </td>
+        </tr>
+        <?php endif ?>
+        <?php foreach ($checks as $check): ?>
         <tr>
           <td><?php echo $check['conname'] ?></td>
           <td><pre data-language="generic"><?php echo $check['condef'] ?></pre></td>
@@ -91,7 +112,14 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($description->getForeignKeys() as $fk): ?>
+        <?php if (!$foreign_keys): ?>
+        <tr>
+          <td colspan="3">
+            <em>No foreign-key contraints</em>
+          </td>
+        </tr>
+        <?php endif ?>
+        <?php foreach ($foreign_keys as $fk): ?>
         <tr>
           <td><?php echo $fk['conname'] ?></td>
           <td><pre data-language="generic"><?php echo $fk['condef'] ?></pre></td>
@@ -109,7 +137,14 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($description->getTriggers() as $trigger): ?>
+        <?php if (!$triggers): ?>
+        <tr>
+          <td colspan="3">
+            <em>No triggers</em>
+          </td>
+        </tr>
+        <?php endif ?>
+        <?php foreach ($triggers as $trigger): ?>
         <tr>
           <td>
             <?php if ($trigger['tgenabled'] == 'D'): ?>
@@ -134,7 +169,14 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($description->getReferences() as $ref): ?>
+        <?php if (!$references): ?>
+        <tr>
+          <td colspan="3">
+            <em>Not referenced</em>
+          </td>
+        </tr>
+        <?php endif ?>
+        <?php foreach ($references as $ref): ?>
         <tr>
           <td><?php echo $ref['ref_table'] ?></td>
           <td><?php echo $ref['conname'] ?></td>
