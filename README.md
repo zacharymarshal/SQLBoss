@@ -83,3 +83,25 @@ If you make the code publically accessible (not recommended) then you can put a 
     RewriteRule    (.*) webroot/$1    [L]
 </IfModule>
 ```
+
+### Run using Nginx
+
+```
+server {
+	listen	80;
+	server_name	sqlboss.localhost;
+	root /var/www/html/SQLBoss/webroot/;
+	index	index.php;
+
+	location / {
+		try_files $uri $uri/ /index.php$is_args$args;
+	}
+
+	location ~ \.php$ {
+		fastcgi_pass   127.0.0.1:9000;
+		fastcgi_index  index.php;
+		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+		include        fastcgi_params; 
+	}
+}
+```
