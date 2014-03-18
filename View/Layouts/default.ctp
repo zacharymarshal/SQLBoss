@@ -37,6 +37,7 @@
 
         <div class="collapse navbar-collapse" id="sqlboss-navbar-collapse">
           <ul class="nav navbar-nav">
+            <?php if (isset($auth_user)): ?>
             <li <?php echo ($this->params['controller'] == 'schema' ? 'class="active"' : '') ?>><?php echo $this->Html->link(
               'Schema',
               array(
@@ -78,8 +79,10 @@
                 ) + $connection_parameters
               ) ?>
             </li>
+            <?php endif ?>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <?php if (isset($auth_user)): ?>
             <li>
               <?php echo $this->Html->link(
                 $auth_user['username'],
@@ -109,6 +112,7 @@
                 array('escape' => false, 'title' => 'Sign out')
               ) ?>
             </li>
+            <?php endif ?>
           </ul>
         </div>
       </div>
