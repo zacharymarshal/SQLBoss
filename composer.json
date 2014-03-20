@@ -10,6 +10,9 @@
   "require": {
     "cakephp/cakephp": "2.*",
     "jdorn/sql-formatter": "1.*",
-    "doctrine/dbal": "2.*"
+    "doctrine/dbal": "2.*",
+    "ext-pdo_pgsql": "*",
+    "ext-pgsql": "*",
+    "ext-mcrypt": "*"
   }
 }
