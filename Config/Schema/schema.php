@@ -1,5 +1,5 @@
 <?php
-class SQLBoss2Schema extends CakeSchema
+class SQLBossSchema extends CakeSchema
 {
     public function before($event = array())
     {

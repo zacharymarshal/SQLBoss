@@ -36,7 +36,7 @@ Configure the rest of the app in ```Config/core.php```
 ### Create the database schema using CakePHP migrations
 
 ```
-Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create
+Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sqlboss
 Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sessions
 ```
 
