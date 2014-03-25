@@ -5,3 +5,8 @@
   border-radius: 0;
   border-left: 0;
 }
+table.floatThead-table {
+  border-top: none;
+  border-bottom: none;
+  background-color: #FFF;
+}

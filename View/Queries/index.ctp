@@ -3,6 +3,8 @@
 // ACE Editor
 $this->Html->script('/media/bower_components/ace-builds/src-min-noconflict/ace', array('inline' => false));
 
+$this->Html->script('/media/bower_components/floatThead/dist/jquery.floatThead.min.js', array('inline' => false));
+
 // Controller specific
 $this->Html->script('/media/sqlboss/queries/js/index', array('inline' => false));
 $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => false));
@@ -79,7 +81,7 @@ $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => fal
         </h4>
         <?php if ($count > 0): ?>
           <div style="overflow-x: auto;">
-            <table class="table table-condensed table-striped table-bordered">
+            <table class="table table-condensed table-striped table-bordered table-float">
               <thead>
                 <tr>
                   <?php $columns = array(); ?>

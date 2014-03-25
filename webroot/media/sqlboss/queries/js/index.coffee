@@ -1,4 +1,5 @@
 $ =>
+
   public_checkbox = $('#query-public').prev()
   $('#query-public').addClass('btn-primary active') if public_checkbox.prop('checked')
   
@@ -18,7 +19,6 @@ $ =>
   query_editor.getSession().setMode 'ace/mode/pgsql'
   query_editor.getSession().setTabSize 2
   query_editor.moveCursorToPosition cursor if localStorage? and cursor = JSON.parse localStorage.getItem('cursor')
-  query_editor.focus()
 
   query_form = $('#QueryIndexForm')
   query_field = $('#QueryQuerySql')
@@ -31,3 +31,5 @@ $ =>
     if e.keyCode == 116 || (e.keyCode == 13 && e.shiftKey)
       e.preventDefault()
       query_form.submit()
+
+  $("table.table-float").floatThead()
