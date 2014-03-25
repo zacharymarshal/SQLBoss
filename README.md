@@ -8,6 +8,8 @@ SQLBoss
 
 #### Install [Composer](http://getcomposer.org)
 #### Install [Bower](http://bower.io/#installing-bower)
+#### Install php-mcrypt
+#### Install php-pgsql
 #### Install PostgreSQL, if you are using a mac I recommend [Postgres.app](http://postgresapp.com/)
 
 ### Run some commands
@@ -34,7 +36,7 @@ Configure the rest of the app in ```Config/core.php```
 ### Create the database schema using CakePHP migrations
 
 ```
-Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create
+Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sqlboss
 Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sessions
 ```
 
