@@ -6,7 +6,8 @@ App::uses('Query', 'Model');
 class QueriesController extends AppController
 {
     public $components = array(
-        'Connection'
+        'Connection',
+        'Paginator'
     );
     public $helpers = array(
         'Text' => array(
@@ -44,14 +45,18 @@ class QueriesController extends AppController
 
     public function history()
     {
-        $this->set('queries', $this->Query->find('all', array(
+        $this->Paginator->settings = array(
+            'limit' => 100,
+            'order' => array(
+                'Query.modified' => 'desc'
+            ),
             'conditions' => array(
                 'user_id' => $this->Auth->user('id'),
                 'label'   => null
             ),
-            'order' => array('Query.modified DESC'),
-            'limit' => 500
-        )));
+        );
+
+        $this->set('queries', $this->Paginator->paginate('Query'));
     }
 
     public function saved($all = false)

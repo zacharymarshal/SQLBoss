@@ -15,7 +15,7 @@ $this->Html->script('/media/sqlboss/queries/js/saved', array('inline' => false))
 <?php foreach ($queries as $query): ?>
 <div class="query">
   <div class="query-creator">
-    <?php echo $this->Html->link($query['User']['username'], array('controller' => 'users', 'action' => 'view', $query['User']['id'])); ?> / 
+    <?php echo $this->Html->link($query['User']['username'], array('controller' => 'users', 'action' => 'view', $query['User']['id'])); ?> /
     <?php echo $this->Html->link("query #{$query['Query']['id']}", array(
       'controller' => 'queries',
       'action'     => 'index',
@@ -36,3 +36,7 @@ $this->Html->script('/media/sqlboss/queries/js/saved', array('inline' => false))
   </div>
 </div>
 <?php endforeach ?>
+<?php $this->Paginator->options(array(
+    'url' => $connection_parameters
+)); ?>
+<?php echo $this->Paginator->prev() ?> <?php echo $this->Paginator->next() ?>
