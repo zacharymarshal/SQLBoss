@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "cd96f81ddfd328499f31727910b058b0",
+    "hash": "d8bc972d69abb5f7070af2051034c550",
     "packages": [
         {
             "name": "cakephp/cakephp",
-            "version": "2.4.5",
+            "version": "2.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "9b4c2f3c86db84e55e8a5f7a8f1325ed7c4715ad"
+                "reference": "45cabd40fe60c7b7d71f148d100050576328338b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/9b4c2f3c86db84e55e8a5f7a8f1325ed7c4715ad",
-                "reference": "9b4c2f3c86db84e55e8a5f7a8f1325ed7c4715ad",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/45cabd40fe60c7b7d71f148d100050576328338b",
+                "reference": "45cabd40fe60c7b7d71f148d100050576328338b",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-01-26 20:06:00"
+            "time": "2014-03-02 02:22:04"
         },
         {
             "name": "doctrine/annotations",
@@ -580,9 +580,11 @@
     "stability-flags": [
 
     ],
-    "platform": [
-
-    ],
+    "platform": {
+        "ext-pdo_pgsql": "*",
+        "ext-pgsql": "*",
+        "ext-mcrypt": "*"
+    },
     "platform-dev": [
 
     ]
