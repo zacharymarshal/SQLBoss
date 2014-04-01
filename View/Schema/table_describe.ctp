@@ -11,6 +11,12 @@ $this->Html->script('/media/sqlboss/schema/js/tableDescribe.js', array('inline' 
 $this->Html->css('/media/rainbow/theme/tomorrow', null, array('inline' => false));
 $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline' => false));
 
+// Highlight.js https://github.com/isagalaev/highlight.js
+$this->Html->script('/media/bower_components/highlightjs/highlight.pack', array('inline' => false));
+$this->Html->css('/media/bower_components/highlightjs/styles/tomorrow.css', null, array('inline' => false));
+$this->Html->script('/media/sqlboss/queries/js/highlighter', array('inline' => false));
+$this->Html->css('/media/sqlboss/queries/css/highlighter', null, array('inline' => false));
+
 ?>
 <?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
 <div class="row">
@@ -55,6 +61,10 @@ $this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline'
         <?php endforeach ?>
       </tbody>
     </table>
+    <?php if ($view_definition): ?>
+      <h3>View Definition</h3>
+      <pre style="tab-stops: dotted 3in"><code class="language-sql"><?php echo $view_definition ?></code></pre>
+    <?php endif ?>
     <h3>Indexes</h3>
     <table class="table table-condensed table-float">
       <thead>

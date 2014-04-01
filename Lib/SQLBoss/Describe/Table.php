@@ -72,6 +72,7 @@ class Table
 
             $index['definition'] = implode(' ', $definition);
         }
+
         return $indexes;
     }
 
@@ -110,6 +111,18 @@ class Table
             }
             $trigger['definition'] = $trigger_def;
         }
+
         return $triggers;
+    }
+
+    public function getViewDefinition()
+    {
+        $oid = $this->queries->getOid($this->schema, $this->table);
+        $catalog = $this->queries->getCatalog($oid);
+        if (!in_array($catalog['relkind'], array('v', 'm'))) {
+            return false;
+        }
+
+        return $this->queries->getViewDefinition($oid);
     }
 }

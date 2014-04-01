@@ -169,4 +169,13 @@ SQL;
 
         return $this->db->fetchAll($sql, array('oid' => $oid));
     }
+
+    public function getViewDefinition($oid)
+    {
+        $sql = <<<SQL
+SELECT pg_catalog.pg_get_viewdef(:oid::pg_catalog.oid, true)
+SQL;
+
+        return $this->db->fetchColumn($sql, array('oid' => $oid));
+    }
 }
