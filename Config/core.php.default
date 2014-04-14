@@ -21,7 +21,8 @@ Configure::write('App.encoding', 'UTF-8');
 define('LOG_ERROR', LOG_ERR);
 
 Configure::write('Session', array(
-    'defaults' => 'database'
+    'defaults'       => 'database',
+    'autoRegenerate' => true
 ));
 
 Configure::write('Security.level', 'medium');
