@@ -20,6 +20,8 @@ class TableDefinition
         $this->platform = $this->remote_connection->getDatabasePlatform();
         \Doctrine\DBAL\Types\Type::addType('arrayintegertype', 'SQLBoss\DBAL\Types\ArrayIntegerType');
         $this->platform->registerDoctrineTypeMapping('_int4', 'arrayintegertype');
+        \Doctrine\DBAL\Types\Type::addType('jsontype', 'SQLBoss\DBAL\Types\JsonType');
+        $this->platform->registerDoctrineTypeMapping('json', 'jsontype');
 
         $this->sm = $this->remote_connection->getSchemaManager();
         $this->table = $this->sm->listTableDetails($table_name);
