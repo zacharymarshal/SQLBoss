@@ -7,16 +7,16 @@
     "packages": [
         {
             "name": "cakephp/cakephp",
-            "version": "2.4.6",
+            "version": "2.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "45cabd40fe60c7b7d71f148d100050576328338b"
+                "reference": "92800889a677899fd5c7a82fb7bab2cbfff887a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/45cabd40fe60c7b7d71f148d100050576328338b",
-                "reference": "45cabd40fe60c7b7d71f148d100050576328338b",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/92800889a677899fd5c7a82fb7bab2cbfff887a3",
+                "reference": "92800889a677899fd5c7a82fb7bab2cbfff887a3",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-03-02 02:22:04"
+            "time": "2014-04-05 02:25:48"
         },
         {
             "name": "doctrine/annotations",
