@@ -19,7 +19,7 @@ class QueriesController extends AppController
     {
         if (in_array($this->action, array('index', 'delete'))) {
             $query_id = isset($this->request->params['pass'][0]) ? $this->request->params['pass'][0] : false;
-            if ( ! $query_id) {
+            if (! $query_id) {
                 return true;
             } elseif ($this->Query->isOwnedBy($query_id, $user['id'])) {
                 return true;
@@ -78,7 +78,7 @@ class QueriesController extends AppController
 
     public function delete($id = null)
     {
-        if ( ! $this->request->is('post')) {
+        if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
         $this->Query->id = $id;
@@ -105,10 +105,10 @@ class QueriesController extends AppController
             return false;
         }
         $this->Query->id = $id;
-        if ( ! $this->Query->exists()) {
+        if (!$this->Query->exists()) {
             throw new NotFoundException(__('Invalid query'));
         }
-        if ( ! $this->formWasSubmitted()) {
+        if (!$this->formWasSubmitted()) {
             $query = $this->Query->read(null, $id);
             if ($query['Query']['user_id'] != $this->Auth->user('id')) {
                 $this->Query->id = null;
@@ -120,31 +120,35 @@ class QueriesController extends AppController
 
     protected function loadTableQuery($table, $method)
     {
-        if ( ! in_array($method, array('SelectStar', 'SelectFields', 'Insert', 'Update', 'Delete'))) {
-            return FALSE;
+        if (!in_array($method, array('SelectStar', 'SelectFields', 'Insert', 'Update', 'Delete'))) {
+            return false;
         }
 
         if ($this->formWasSubmitted()) {
-            return FALSE;
+            return false;
         }
 
         $remote_connection = $this->Connection->getRemoteConnection();
-        $table_definition = new \SQLBoss\TableDefinition(array(
-            'remote_connection' => $remote_connection,
-            'table_name'        => $table
-        ));
+        $table_queries = new \SQLBoss\Describe\TableQueries($remote_connection);
+        if (strstr($table, '.')) {
+            list($schema, $table) = explode('.', $table);
+        } else {
+            $table = $table;
+            $schema = 'public';
+        }
+        $describe_table = new SQLBoss\Describe\Table($schema, $table, $table_queries);
 
         $method = "get{$method}Sql";
         $this->request->data = array(
             'Query' => array(
-                'query_sql' => $table_definition->$method()
+                'query_sql' => $describe_table->$method()
             )
         );
     }
 
     protected function handleFormSubmission()
     {
-        if ( ! $this->formWasSubmitted()) {
+        if (!$this->formWasSubmitted()) {
             return false;
         }
         $this->saveWasClicked();
@@ -153,7 +157,7 @@ class QueriesController extends AppController
 
     protected function saveWasClicked()
     {
-        if ( ! isset($this->request->data['save'])) {
+        if (!isset($this->request->data['save'])) {
             return false;
         }
 

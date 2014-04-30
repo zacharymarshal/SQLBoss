@@ -125,4 +125,93 @@ class Table
 
         return $this->queries->getViewDefinition($oid);
     }
+
+    public function getSelectStarSql()
+    {
+        return <<<SQL
+SELECT *
+FROM "{$this->schema}"."{$this->table}"
+LIMIT 100;
+SQL;
+    }
+
+    public function getSelectFieldsSql()
+    {
+        $columns = implode(
+            ",\n\t",
+            array_map(
+                function ($field) {
+                    return "\"{$field['column']}\"";
+                },
+                $this->getFields()
+            )
+        );
+
+        return <<<SQL
+SELECT
+\t{$columns}
+FROM "{$this->schema}"."{$this->table}"
+LIMIT 100;
+SQL;
+    }
+
+    public function getInsertSql()
+    {
+        $fields = $this->getFields();
+        $column_fields_sql = implode(
+            ",\n\t",
+            array_map(
+                function ($field) {
+                    return "\"{$field['column']}\"";
+                },
+                $fields
+            )
+        );
+        $column_values_sql = implode(
+            "\n\t",
+            array_map(
+                function ($field) {
+                    return ":{$field['column']}, -- {$field['type']}";
+                },
+                $fields
+            )
+        );
+
+        return <<<SQL
+INSERT INTO "{$this->schema}"."{$this->table}" (
+\t{$column_fields_sql}
+)
+VALUES (
+\t{$column_values_sql}
+);
+SQL;
+    }
+
+    public function getUpdateSql()
+    {
+        $column_fields_sql = implode(
+            ",\n\t",
+            array_map(
+                function ($field) {
+                    return "\"{$field['column']}\" = ?";
+                },
+                $this->getFields()
+            )
+        );
+
+        return <<<SQL
+UPDATE "{$this->schema}"."{$this->table}"
+SET
+\t{$column_fields_sql}
+WHERE :condition;
+SQL;
+    }
+
+    public function getDeleteSql()
+    {
+        return <<<SQL
+DELETE FROM "{$this->schema}"."{$this->table}"
+WHERE :condition;
+SQL;
+    }
 }

@@ -36,18 +36,4 @@ class SchemaController extends AppController
         $this->set('checks', $description->getChecks());
         $this->set('view_definition', $description->getViewDefinition());
     }
-
-    public function tableDefinition()
-    {
-        $remote_connection = $this->Connection->getRemoteConnection();
-
-        $table_definition = new \SQLBoss\TableDefinition(array(
-            'remote_connection' => $remote_connection,
-            'table_name'        => $this->params['pass'][0]
-        ));
-
-        $this->set('table_name', $table_definition->getName());
-        $this->set('table_sql', $table_definition->getCreateSql());
-        $this->set('drop_table_sql', $table_definition->getDropSql());
-    }
 }
