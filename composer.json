@@ -13,6 +13,7 @@
     "doctrine/dbal": "2.*",
     "ext-pdo_pgsql": "*",
     "ext-pgsql": "*",
-    "ext-mcrypt": "*"
+    "ext-mcrypt": "*",
+    "assetrinc/assetrinc": "0.*"
   }
 }
