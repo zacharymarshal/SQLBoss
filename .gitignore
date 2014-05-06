@@ -12,3 +12,4 @@ tmp/logs/*
 tmp/sessions/*
 tmp/tests/*
 webroot/media/bower_components/*
+node_modules/*
