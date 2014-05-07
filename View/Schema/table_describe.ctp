@@ -9,7 +9,7 @@ $this->Html->script('/media/bower_components/floatThead/dist/jquery.floatThead.m
 $this->Html->script('/media/sqlboss/schema/js/tableDescribe.js', array('inline' => false));
 
 $this->Html->css('/media/rainbow/theme/tomorrow', null, array('inline' => false));
-$this->Html->css('/media/sqlboss/schema/css/tableDescribe', null, array('inline' => false));
+$this->Html->css('/assets/sqlboss/schema/css/tableDescribe', null, array('inline' => false));
 
 // Highlight.js https://github.com/isagalaev/highlight.js
 $this->Html->script('/media/bower_components/highlightjs/highlight.pack', array('inline' => false));
