@@ -2,6 +2,7 @@
 
 App::uses('Controller', 'Controller');
 App::uses('Connection', 'Model');
+App::uses('AssetrincHelper', 'View/Helper');
 
 class AppController extends Controller
 {
@@ -30,7 +31,7 @@ class AppController extends Controller
             'className' => 'ExtraForm'
         ),
         'Session',
-
+        'Assetrinc',
     );
 
     public function beforeFilter()

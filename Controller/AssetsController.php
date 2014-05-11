@@ -6,15 +6,7 @@ class AssetsController extends AppController
 {
     public function index()
     {
-        $asset_service = new AssetService(
-            array(
-                'sqlboss'          => __DIR__ . '/../webroot/media/sqlboss',
-                'bower_components' => __DIR__ . '/../webroot/media/bower_components',
-                'rainbow'          => __DIR__ . '/../webroot/media/rainbow',
-            ),
-            Router::url('/assets', true),
-            array('debug' => true)
-        );
+        $asset_service = AssetrincHelper::getAssetService();
         $name = implode('/', func_get_args());
         $content_type = $asset_service->getContentType($name);
 

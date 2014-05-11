@@ -1,12 +1,7 @@
 <?php 
 
-// ACE Editor
-$this->Html->script('/media/bower_components/ace-builds/src-min-noconflict/ace', array('inline' => false));
+$this->Assetrinc->js('sqlboss/queries/js/index.js.coffee', array('inline' => false));
 
-$this->Html->script('/media/bower_components/floatThead/dist/jquery.floatThead.min.js', array('inline' => false));
-
-// Controller specific
-$this->Html->script('/media/sqlboss/queries/js/index', array('inline' => false));
 $this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => false));
 ?>
 
