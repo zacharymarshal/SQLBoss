@@ -32,6 +32,6 @@ class AssetrincHelper extends AppHelper
 
     public function css($file)
     {
-        return self::getAssetService()->cssTag($file);
+        return $this->_View->append('css', self::getAssetService()->cssTag($file));
     }
 }

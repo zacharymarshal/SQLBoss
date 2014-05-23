@@ -1,8 +1,8 @@
 <?php 
 
-$this->Assetrinc->js('sqlboss/queries/js/index.js.coffee', array('inline' => false));
+$this->Assetrinc->js('sqlboss/queries/js/index.js.coffee');
+$this->Assetrinc->css('sqlboss/queries/css/index.css');
 
-$this->Html->css('/media/sqlboss/queries/css/index', null, array('inline' => false));
 ?>
 
 <?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
