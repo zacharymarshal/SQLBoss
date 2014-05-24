@@ -1,6 +1,5 @@
 <?php
-$this->Html->script('/media/sqlboss/schema/js/index', array('inline' => false));
-$this->Html->script('/media/list/js/list', array('inline' => false));
+$this->Assetrinc->js('sqlboss/schema/js/index.js.coffee');
 ?>
 <?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
 <div id="tables-list">
