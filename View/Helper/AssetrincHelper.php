@@ -15,6 +15,7 @@ class AssetrincHelper extends AppHelper
                 array(
                     'sqlboss'          => __DIR__ . '/../../webroot/media/sqlboss',
                     'bower_components' => __DIR__ . '/../../webroot/media/bower_components',
+                    'list'             => __DIR__ . '/../../webroot/media/list',
                     'rainbow'          => __DIR__ . '/../../webroot/media/rainbow',
                 ),
                 Router::url('/assets', true),
