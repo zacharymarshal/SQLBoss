@@ -1,20 +1,10 @@
 <?php
-// Syntax highlighting
-$this->Html->script('/media/bower_components/rainbow/js/rainbow.min.js', array('inline' => false));
-$this->Html->script('/media/bower_components/rainbow/js/language/generic.js', array('inline' => false));
 
-// Table floating
-$this->Html->script('/media/bower_components/floatThead/dist/jquery.floatThead.min.js', array('inline' => false));
-
-$this->Html->script('/media/sqlboss/schema/js/tableDescribe.js', array('inline' => false));
+$this->Assetrinc->js('sqlboss/schema/js/tableDescribe.js.coffee');
 
 $this->Html->css('/media/rainbow/theme/tomorrow', null, array('inline' => false));
 $this->Html->css('/assets/sqlboss/schema/css/tableDescribe', null, array('inline' => false));
-
-// Highlight.js https://github.com/isagalaev/highlight.js
-$this->Html->script('/media/bower_components/highlightjs/highlight.pack', array('inline' => false));
 $this->Html->css('/media/bower_components/highlightjs/styles/tomorrow.css', null, array('inline' => false));
-$this->Html->script('/media/sqlboss/queries/js/highlighter', array('inline' => false));
 $this->Html->css('/media/sqlboss/queries/css/highlighter', null, array('inline' => false));
 
 ?>
