@@ -1,3 +1,9 @@
+/*
+ *= require /rainbow/theme/tomorrow.css
+ *= require /bower_components/highlightjs/styles/tomorrow.css
+ *= require /sqlboss/queries/css/highlighter.css
+ */
+
 table.floatThead-table {
   border-top: none;
   border-bottom: none;

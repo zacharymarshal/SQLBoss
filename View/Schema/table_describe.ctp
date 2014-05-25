@@ -1,13 +1,5 @@
-<?php
-
-$this->Assetrinc->js('sqlboss/schema/js/tableDescribe.js.coffee');
-
-$this->Html->css('/media/rainbow/theme/tomorrow', null, array('inline' => false));
-$this->Html->css('/assets/sqlboss/schema/css/tableDescribe', null, array('inline' => false));
-$this->Html->css('/media/bower_components/highlightjs/styles/tomorrow.css', null, array('inline' => false));
-$this->Html->css('/media/sqlboss/queries/css/highlighter', null, array('inline' => false));
-
-?>
+<?php $this->Assetrinc->js('sqlboss/schema/js/tableDescribe.js.coffee'); ?>
+<?php $this->Assetrinc->css('sqlboss/schema/css/tableDescribe.css'); ?>
 <?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
 <div class="row">
   <div class="actions col-sm-2">
