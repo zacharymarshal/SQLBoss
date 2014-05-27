@@ -2,6 +2,8 @@
 
 namespace SQLBoss;
 
+use SqlFormatter;
+
 class QueryRunner
 {
     protected $remote_connection;
@@ -26,7 +28,7 @@ class QueryRunner
     public function runQueries()
     {
         if ($this->multiple_queries === true) {
-            $queries = \SqlFormatter::splitQuery($this->sql);
+            $queries = SqlFormatter::splitQuery($this->sql);
         } else {
             $queries = $this->sql;
         }
