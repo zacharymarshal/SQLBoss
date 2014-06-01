@@ -775,17 +775,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.4.5",
+            "version": "v2.5.0",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "a7118cb290c62068b3c8ecfbf8b2eda8421fb841"
+                "reference": "5d7d78e23894544740219e006320678cfa4cd45b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/a7118cb290c62068b3c8ecfbf8b2eda8421fb841",
-                "reference": "a7118cb290c62068b3c8ecfbf8b2eda8421fb841",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/5d7d78e23894544740219e006320678cfa4cd45b",
+                "reference": "5d7d78e23894544740219e006320678cfa4cd45b",
                 "shasum": ""
             },
             "require": {
@@ -794,7 +794,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -820,7 +820,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-22 13:46:01"
+            "time": "2014-05-23 09:02:52"
         },
         {
             "name": "zacharyrankin/sprocketeer",
