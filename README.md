@@ -16,6 +16,7 @@ SQLBoss
 
 ```
 composer install
+npm install
 bower install
 cp Config/database.php.default Config/database.php
 cp Config/core.php.default Config/core.php
