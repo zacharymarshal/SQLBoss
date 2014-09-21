@@ -42,18 +42,11 @@ Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sessions
 
 ### Setup initial system administrator account
 
-Go into ```UsersController``` and add the ability to add a new user:
-
+Replace `your_username` with the username you would like to use.
 
 ```
-public function beforeFilter()
-{
-    parent::beforeFilter();
-    $this->Auth->allow('add');
-}
+Vendor/cakephp/cakephp/lib/Cake/Console/cake user create your_username admin
 ```
-
-Go to ```/users/add``` and add your default admin users. Remove the beforeFilter() after you are done.
 
 ### Run a local server using PHP 5.4 built in webserver
 
