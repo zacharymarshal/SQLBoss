@@ -2,6 +2,8 @@
 
 App::uses('AppController', 'Controller');
 
+use SQLBoss\Describe\TableQueries;
+
 class SchemaController extends AppController
 {
     public $components = array(
@@ -11,14 +13,24 @@ class SchemaController extends AppController
     public function index()
     {
         $remote_connection = $this->Connection->getRemoteConnection();
-        $this->set('tables', $remote_connection->getSchemaManager()->listTableNames());
+        $table_queries = new TableQueries($remote_connection);
+        $tableTypes = (!empty($this->params->query['tt'])
+            ? $this->params->query['tt'] : array('r'));
+        $tables = array();
+        // TODO: Move this to a new object
+        foreach ($table_queries->listTables($tableTypes) as $table) {
+            $tables[] = $table['schema'] . '.' . $table['name'];
+        }
+        $this->set('tables', $tables);
+        $this->set('showingTables', in_array('r', $tableTypes));
+        $this->set('showingViews', in_array('v', $tableTypes));
     }
 
     public function tableDescribe()
     {
         $remote_connection = $this->Connection->getRemoteConnection();
 
-        $table_queries = new \SQLBoss\Describe\TableQueries($remote_connection);
+        $table_queries = new TableQueries($remote_connection);
         if (strstr($this->params['pass'][0], '.')) {
             list($schema, $table) = explode('.', $this->params['pass'][0]);
         } else {
