@@ -178,4 +178,35 @@ SQL;
 
         return $this->db->fetchColumn($sql, array('oid' => $oid));
     }
+
+    public function listTables(array $tableTypes = array())
+    {
+        $sql = <<<SQL
+SELECT
+    n.nspname AS schema,
+    c.relname AS name,
+    CASE c.relkind
+        WHEN 'r' THEN 'table'
+        WHEN 'v' THEN 'view'
+        WHEN 'm' THEN 'materialized view'
+        WHEN 'i' THEN 'index'
+        WHEN 'S' THEN 'sequence'
+        WHEN 's' THEN 'special'
+        WHEN 'f' THEN 'foreign table'
+    END AS type
+FROM pg_catalog.pg_class c
+LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+WHERE c.relkind IN (:types)
+    AND n.nspname <> 'pg_catalog'
+    AND n.nspname <> 'information_schema'
+    AND n.nspname !~ '^pg_toast'
+ORDER BY 1,2
+SQL;
+
+        return $this->db->executeQuery(
+            $sql,
+            array('types' => $tableTypes),
+            array('types' => \Doctrine\DBAL\Connection::PARAM_STR_ARRAY)
+        )->fetchAll();
+    }
 }
