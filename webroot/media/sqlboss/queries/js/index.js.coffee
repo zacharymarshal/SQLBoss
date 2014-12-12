@@ -1,6 +1,7 @@
 #= require /bower_components/ace-builds/src-min-noconflict/ace.js
 #= require /bower_components/ace-builds/src-min-noconflict/theme-tomorrow.js
 #= require /bower_components/ace-builds/src-min-noconflict/mode-pgsql.js
+#= require /bower_components/ace-builds/src-min-noconflict/ext-searchbox.js
 #= require /bower_components/floatThead/dist/jquery.floatThead.min.js
 
 $ =>
