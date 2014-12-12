@@ -2,7 +2,9 @@
 
 use Assetrinc\AssetService;
 
-class AssetsController extends AppController
+App::uses('AssetrincHelper', 'View/Helper');
+
+class AssetsController extends Controller
 {
     public function index()
     {
