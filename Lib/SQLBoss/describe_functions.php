@@ -25,6 +25,7 @@ function describeFunction(callable $getRow, $oid)
 {
     $sql = <<<SQL
 SELECT
+    p.oid,
     n.nspname AS "schema",
     p.proname AS "name",
     pg_catalog.pg_get_function_result(p.oid) AS result_data_type,
@@ -36,7 +37,7 @@ SELECT
         ELSE 'normal'
     END AS type,
     pg_catalog.pg_get_functiondef(p.oid) AS definition
-FROM pg_catalog.pg_namespace p
+FROM pg_catalog.pg_proc p
 LEFT JOIN pg_catalog.pg_namespace n ON n.oid = p.pronamespace
 WHERE p.oid = ?
 SQL;
