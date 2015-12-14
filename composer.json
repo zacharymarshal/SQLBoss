@@ -2,7 +2,8 @@
   "autoload": {
     "psr-0": {
       "SQLBoss": "Lib/"
-    }
+    },
+    "files": ["Lib/SQLBoss/describe_functions.php"]
   },
   "config": {
     "vendor-dir": "Vendor"
