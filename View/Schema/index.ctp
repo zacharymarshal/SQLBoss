@@ -4,22 +4,7 @@ $this->Assetrinc->js('sqlboss/schema/js/index.js.coffee');
 <?php echo $this->DatabaseNavigation->create($connection, $connection_parameters) ?>
 
 <div class="row">
-  <div class="actions col-xs-2 col-md-2">
-    <ul class="nav nav-pills nav-stacked">
-      <li<?php if ($showingTables): ?> class="active"<?php endif ?>>
-        <?php echo $this->Html->link(
-          __('Tables'),
-          $connection_parameters
-        ); ?>
-      </li>
-      <li<?php if ($showingViews): ?> class="active"<?php endif ?>>
-        <?php echo $this->Html->link(
-          __('Views'),
-          array('?' => array('tt' => array('v'))) + $connection_parameters
-        ); ?>
-      </li>
-    </ul>
-  </div>
+  <?= $this->SchemaNavigation->create($connection_parameters, $active_tab) ?>
   <div class="col-xs-10 col-md-10">
     <div id="tables-list">
       <p>
