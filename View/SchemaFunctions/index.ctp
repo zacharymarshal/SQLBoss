@@ -16,7 +16,7 @@
             <ul class="list nav nav-pills nav-stacked">
                 <?php foreach ($functions as $function): ?>
                     <li><?php echo $this->Html->link(
-                        $function['schema'] . '.' . $function['name'] . '(' . $function['arg_data_types'] . ')',
+                        \SQLBoss\getFunctionDescription($function),
                         [
                             'action' => 'describe',
                             $function['oid']

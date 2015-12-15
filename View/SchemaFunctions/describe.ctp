@@ -16,10 +16,20 @@ $this->Html->css('/media/sqlboss/queries/css/highlighter', null, array('inline' 
                     ['controller' => 'schema_functions', 'action' => 'index'] + $connection_parameters,
                     ['escape' => false]
             ); ?></li>
+            <li><?php echo $this->Html->link(
+                    'SELECT',
+                    [
+                        'controller'    => 'queries',
+                        'action'        => 'index',
+                        'defined_query' => 'select_function',
+                        'function_oid'  => $function['oid'],
+                    ] + $connection_parameters,
+                    ['escape' => false]
+                ); ?></li>
         </ul>
     </div>
     <div class="col-sm-10">
-        <h2>Function: <?= $function['schema'] . '.' . $function['name'] . '(' . $function['arg_data_types'] . ')' ?></h2>
+        <h2>Function: <?= \SQLBoss\getFunctionDescription($function) ?></h2>
         <h3>Information</h3>
         <table class="table table-condensed table-float">
             <thead>

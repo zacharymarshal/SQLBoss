@@ -21,7 +21,7 @@ SQL;
     return $getAll($sql);
 }
 
-function describeFunction(callable $getRow, $oid)
+function getFunction(callable $getRow, $oid)
 {
     $sql = <<<SQL
 SELECT
@@ -36,11 +36,28 @@ SELECT
         WHEN p.prorettype = 'pg_catalog.trigger' :: pg_catalog.regtype THEN 'trigger'
         ELSE 'normal'
     END AS type,
-    pg_catalog.pg_get_functiondef(p.oid) AS definition
+    CASE
+        WHEN p.proisagg THEN 'None'
+        ELSE pg_catalog.pg_get_functiondef(p.oid)
+    END AS definition
 FROM pg_catalog.pg_proc p
 LEFT JOIN pg_catalog.pg_namespace n ON n.oid = p.pronamespace
 WHERE p.oid = ?
 SQL;
 
     return $getRow($sql, [$oid]);
+}
+
+function getFunctionDescription($function)
+{
+    return $function['schema'] . '.' . $function['name'] . '(' . $function['arg_data_types'] . ')';
+}
+
+function getFunctionSelectQuery($function)
+{
+    $desc = getFunctionDescription($function);
+
+    return <<<SQL
+SELECT {$desc};
+SQL;
 }

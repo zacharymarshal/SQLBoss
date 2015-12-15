@@ -20,6 +20,6 @@ class SchemaFunctionsController extends AppController
     {
         $remote_connection = $this->Connection->getRemoteConnection();
         $oid = $this->params['pass'][0];
-        $this->set('function', SQLBoss\describeFunction([$remote_connection, 'fetchAssoc'], $oid));
+        $this->set('function', SQLBoss\getFunction([$remote_connection, 'fetchAssoc'], $oid));
     }
 }
