@@ -244,7 +244,7 @@ class QueriesController extends AppController
         ];
 
         if (empty($preloaded_queries[$this->request->named['defined_query']])) {
-            return;
+            throw new NotImplementedException("Preloaded query not found.");
         }
 
         if (isset($this->request->data['Query'])) {
