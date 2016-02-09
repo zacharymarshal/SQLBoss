@@ -35,9 +35,11 @@ class QueriesController extends AppController
 
     public function index($id = null)
     {
+        $this->loadDefinedQuery();
+
         if (isset($this->request->named['define_table']) && isset($this->request->named['define_table_method'])) {
             $this->loadTableQuery($this->request->named['define_table'], $this->request->named['define_table_method']);
-        } else {
+        } elseif ($id) {
             $this->loadQuery($id);
         }
         $this->handleFormSubmission();
@@ -222,5 +224,37 @@ class QueriesController extends AppController
         $statements = $query_runner->runQueries();
         $query_errors = $query_runner->getErrors() ?: array();
         $this->set(compact('statements', 'query_errors'));
+    }
+
+    private function loadDefinedQuery()
+    {
+        if (empty($this->request->named['defined_query'])) {
+            return;
+        }
+
+        $preloaded_queries = [
+            'select_function' => function () {
+                $remote_connection = $this->Connection->getRemoteConnection();
+                $oid = $this->request->named['function_oid'];
+
+                return \SQLBoss\getFunctionSelectQuery(
+                    \SQLBoss\getFunction([$remote_connection, 'fetchAssoc'], $oid)
+                );
+            }
+        ];
+
+        if (empty($preloaded_queries[$this->request->named['defined_query']])) {
+            throw new NotImplementedException("Preloaded query not found.");
+        }
+
+        if (isset($this->request->data['Query'])) {
+            return;
+        }
+
+        $this->request->data['Query'] = [
+            'query_sql' => call_user_func(
+                $preloaded_queries[$this->request->named['defined_query']]
+            )
+        ];
     }
 }

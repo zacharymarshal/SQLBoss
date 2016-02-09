@@ -22,8 +22,7 @@ class SchemaController extends AppController
             $tables[] = $table['schema'] . '.' . $table['name'];
         }
         $this->set('tables', $tables);
-        $this->set('showingTables', in_array('r', $tableTypes));
-        $this->set('showingViews', in_array('v', $tableTypes));
+        $this->set('active_tab', (in_array('v', $tableTypes) ? 'views' : 'tables'));
     }
 
     public function tableDescribe()
