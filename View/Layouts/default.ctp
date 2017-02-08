@@ -9,11 +9,8 @@
     <?php echo $title_for_layout; ?>
   </title>
   <?php
-    echo $this->Html->css('/media/bower_components/bootstrap/dist/css/bootstrap.min.css');
-    echo $this->Html->css('/media/bower_components/font-awesome/css/font-awesome.min.css');
-
-    echo $this->Html->script('/media/bower_components/jquery/dist/jquery.min.js');
-    echo $this->Html->script('/media/bower_components/bootstrap/dist/js/bootstrap.min.js');
+    echo $this->Html->css('//cdn.jsdelivr.net/bootstrap/3.1.1/css/bootstrap.min.css');
+    echo $this->Html->css('//cdn.jsdelivr.net/fontawesome/4.0.3/css/font-awesome.min.css');
 
     echo $this->fetch('meta');
     echo $this->fetch('css');
@@ -131,4 +128,6 @@
   <?php echo $this->element('sql_dump'); ?>
   <?php echo $this->fetch('script'); ?>
 </body>
+    echo $this->Html->script('//cdn.jsdelivr.net/jquery/2.1.0/jquery.min.js');
+    echo $this->Html->script('//cdn.jsdelivr.net/bootstrap/3.1.1/js/bootstrap.min.js');
 </html>
