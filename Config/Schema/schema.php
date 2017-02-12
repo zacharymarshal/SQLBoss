@@ -36,7 +36,10 @@ class SQLBossSchema extends CakeSchema
         'created'    => array('type' => 'datetime', 'null' => true),
         'modified'   => array('type' => 'datetime', 'null' => true),
         'indexes'    => array(
-            'PRIMARY' => array('unique' => true, 'column' => 'id')
+            'PRIMARY' => array('unique' => true, 'column' => 'id'),
+            'queries_query_hash_idx' => array('column' => 'query_hash'),
+            'queries_user_id_idx' => array('column' => 'user_id'),
+            'queries_user_id_modified_idx' => array('column' => ['user_id', 'modified']),
         ),
         'tableParameters' => array()
     );
