@@ -12,8 +12,7 @@ SELECT
     pg_catalog.pg_get_function_arguments(p.oid) AS arg_data_types
 FROM pg_catalog.pg_proc p
 LEFT JOIN pg_catalog.pg_namespace n ON n.oid = p.pronamespace
-WHERE pg_catalog.pg_function_is_visible(p.oid)
-    AND n.nspname <> 'pg_catalog'
+WHERE n.nspname <> 'pg_catalog'
     AND n.nspname <> 'information_schema'
 ORDER BY 2, 3, 4
 SQL;
