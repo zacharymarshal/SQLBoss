@@ -1,0 +1,16 @@
+[Cc]onfig/core.php
+[Cc]onfig/database.php
+!empty
+.DS_Store
+Vendor/*
+tmp/*
+tmp/cache/*
+tmp/cache/models/*
+tmp/cache/persistent/*
+tmp/cache/views/*
+tmp/logs/*
+tmp/sessions/*
+tmp/tests/*
+webroot/media/bower_components/*
+node_modules/*
+.idea/
