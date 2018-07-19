@@ -1,6 +1,6 @@
 <?php
 
-Configure::write('debug', 1);
+Configure::write('debug', 0);
 
 Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 
