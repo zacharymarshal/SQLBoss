@@ -31,7 +31,7 @@ RUN /usr/local/bin/composer update --no-dev
 RUN npm install
 RUN bower install -s --config.interactive=false --allow-root
 
-COPY docker-fs/core.php Config/core.php
+COPY docker-fs/core.php docker-fs/bootstrap.php Config/
 COPY docker-fs/htaccess webroot/.htaccess
 
 RUN mkdir -p tmp/cache/views \
