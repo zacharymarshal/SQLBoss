@@ -1,8 +1,14 @@
 <?php
 
-Configure::write('debug', 0);
+if (getenv('CAKEPHP_DEBUG') == "1") {
+  Configure::write('debug', 1);
+} else {
+  Configure::write('debug', 0);
+}
 
 Configure::write('App.baseUrl', env('SCRIPT_NAME'));
+
+Configure::write('Exception.log', true);
 
 Configure::write('Error', array(
     'handler' => 'ErrorHandler::handleError',
