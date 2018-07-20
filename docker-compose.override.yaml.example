@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  sqlboss:
+    ports:
+      - "8000:80"
+    volumes:
+      - ./Config/database.php:/var/www/html/Config/database.php

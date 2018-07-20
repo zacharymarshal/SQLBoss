@@ -14,3 +14,4 @@ tmp/tests/*
 webroot/media/bower_components/*
 node_modules/*
 .idea/
+docker-compose.override.yaml

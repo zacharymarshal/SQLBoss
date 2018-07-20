@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  sqlboss:
+    image: quay.io/illuminateeducation/sqlboss:master
+    environment:
+      CAKEPHP_SALT: salty
+      CAKEPHP_CIPHER: 000000000
+      CAKEPHP_DEBUG: 0
