@@ -28,7 +28,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x > /tmp/node_setup \
   && echo "${NODEJS_SHASUM_CHECK}  /tmp/node_setup" | shasum -sc \
   && bash /tmp/node_setup \
   && apt-get install -y nodejs \
-  && rm -f /tmp/node_setup && echo "test" > /dev/null
+  && rm -f /tmp/node_setup
 
 WORKDIR /var/www/html
 
