@@ -1,22 +1,6 @@
 FROM composer:1.6 as composer
 
 
-
-FROM node:8 as build-app
-
-RUN mkdir -p /var/www/html
-
-WORKDIR /var/www/html
-
-COPY . ./
-
-RUN npm install -g bower
-
-RUN bower install -p -s --config.interactive=false --allow-root
-
-RUN npm install
-
-
 FROM php:5-apache
 
 RUN apt-get update && apt-get install -y libpq-dev git zip libmcrypt-dev gnupg \
@@ -39,11 +23,13 @@ RUN echo 'PassEnv HTTPS' > /etc/apache2/conf-enabled/expose-env.conf
 
 COPY . ./
 
-COPY --from=build-app /var/www/html/webroot/media/bower_components /var/www/html/webroot/media/bower_components
-COPY --from=build-app /var/www/html/node_modules /var/www/html/node_modules
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
 RUN /usr/local/bin/composer install --no-dev
+
+RUN npm install -g bower \
+  && npm install \
+  && bower install -p -s --config.interactive=false --allow-root
 
 COPY docker-fs/core.php docker-fs/bootstrap.php Config/
 COPY docker-fs/htaccess webroot/.htaccess
