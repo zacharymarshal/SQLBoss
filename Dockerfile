@@ -16,11 +16,6 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x > /tmp/node_setup \
 
 WORKDIR /var/www/html
 
-ENV APACHE_DOCUMENT_ROOT /var/www/html/webroot
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-RUN echo 'PassEnv HTTPS' > /etc/apache2/conf-enabled/expose-env.conf
-
 COPY . ./
 
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
@@ -31,9 +26,15 @@ RUN npm install -g bower \
   && npm install \
   && bower install -p -s --config.interactive=false --allow-root
 
-COPY docker-fs/core.php docker-fs/bootstrap.php Config/
+COPY Config/core.php.docker Config/core.php
+COPY Config/bootstrap.php.docker Config/bootstrap.php
 COPY docker-fs/htaccess webroot/.htaccess
 COPY ./docker-entrypoint.sh /
+
+ENV APACHE_DOCUMENT_ROOT /var/www/html/webroot
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN echo 'PassEnv HTTPS' > /etc/apache2/conf-enabled/expose-env.conf
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
