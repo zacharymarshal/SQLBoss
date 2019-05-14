@@ -31,7 +31,7 @@ class DatabaseList
         $this->connections = $this->connection->find('all', array(
             'recursive'  => -1,
             'conditions' => array('user_id' => $this->user_id),
-            'order'      => array('Connection.id')
+            'order'      => array('Connection.label')
         ));
 
         return $this->connections;
