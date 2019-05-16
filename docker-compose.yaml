@@ -4,6 +4,6 @@ services:
   sqlboss:
     image: quay.io/illuminateeducation/sqlboss:master
     environment:
-      CAKEPHP_SALT: salty
-      CAKEPHP_CIPHER: 000000000
+      CAKEPHP_SALT: dei8itaiki9aey8eigaineiX
+      CAKEPHP_CIPHER: gaizi4quizaefeequ6Uph6wohpheiGhoo0op
       CAKEPHP_DEBUG: 0
