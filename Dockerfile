@@ -1,3 +1,4 @@
+# using the composer image just to get the composer binary
 FROM composer:1.6 as composer
 
 
