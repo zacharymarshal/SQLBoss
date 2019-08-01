@@ -18,7 +18,7 @@ class AssetrincHelper extends AppHelper
                     'list'             => __DIR__ . '/../../webroot/media/list',
                     'rainbow'          => __DIR__ . '/../../webroot/media/rainbow',
                 ),
-                Router::url('/assets', true),
+                Router::url('/assets'),
                 array('debug' => Configure::read('debug') > 0)
             );
         }
