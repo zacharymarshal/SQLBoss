@@ -1,0 +1,13 @@
+sudo: required
+services:
+  - docker
+env:
+  - DOCKER_SLUG="$(echo $TRAVIS_REPO_SLUG | tr '[:upper:]' '[:lower:]')"
+script:
+  - docker build -t $DOCKER_SLUG .
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin quay.io
+  - docker tag $DOCKER_SLUG:latest quay.io/$DOCKER_SLUG:$TRAVIS_COMMIT
+  - docker tag $DOCKER_SLUG:latest quay.io/$DOCKER_SLUG:$TRAVIS_BRANCH
+  - if ! $TRAVIS_PULL_REQUEST ; then docker push quay.io/$DOCKER_SLUG:$TRAVIS_COMMIT ; fi
+  - if ! $TRAVIS_PULL_REQUEST ; then docker push quay.io/$DOCKER_SLUG:$TRAVIS_BRANCH ; fi

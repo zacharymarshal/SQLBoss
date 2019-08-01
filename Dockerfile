@@ -9,11 +9,11 @@ RUN apt-get update && apt-get install -y libpq-dev git zip libmcrypt-dev gnupg \
   && a2enmod rewrite
 
 ENV NODEJS_MAJOR_VERSION=8 \
-    NODEJS_MINOR_VERSION=16 \
+    NODEJS_MINOR_VERSION=12 \
     NODEJS_PATCH_VERSION=0 \
-    NODEJS_SHA256SUM=b391450e0fead11f61f119ed26c713180cfe64b363cd945bac229130dfab64fa
+    NODEJS_SHA256SUM=3df19b748ee2b6dfe3a03448ebc6186a3a86aeab557018d77a0f7f3314594ef6
 ENV NODEJS_VERSION=${NODEJS_MAJOR_VERSION}.${NODEJS_MINOR_VERSION}.${NODEJS_PATCH_VERSION}
-RUN curl --retry 7 -Lso /tmp/nodejs.tgz "https://nodejs.org/dist/latest-v${NODEJS_MAJOR_VERSION}.x/node-v${NODEJS_VERSION}-linux-x64.tar.gz" \
+RUN curl --retry 7 -Lso /tmp/nodejs.tgz "https://nodejs.org/dist/v${NODEJS_VERSION}/node-v${NODEJS_VERSION}-linux-x64.tar.gz" \
 && echo "${NODEJS_SHA256SUM}  /tmp/nodejs.tgz" | sha256sum -c \
 && tar zxf /tmp/nodejs.tgz -C /usr/local --strip-components=1
 
