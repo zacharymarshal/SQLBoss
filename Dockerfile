@@ -13,7 +13,7 @@ ENV NODEJS_MAJOR_VERSION=8 \
     NODEJS_PATCH_VERSION=0 \
     NODEJS_SHA256SUM=b391450e0fead11f61f119ed26c713180cfe64b363cd945bac229130dfab64fa
 ENV NODEJS_VERSION=${NODEJS_MAJOR_VERSION}.${NODEJS_MINOR_VERSION}.${NODEJS_PATCH_VERSION}
-RUN curl --retry 7 -Lso /tmp/nodejs.tgz "https://nodejs.org/dist/latest-v8.x/node-v${NODEJS_VERSION}-linux-x64.tar.gz" \
+RUN curl --retry 7 -Lso /tmp/nodejs.tgz "https://nodejs.org/dist/latest-v${NODEJS_MAJOR_VERSION}.x/node-v${NODEJS_VERSION}-linux-x64.tar.gz" \
 && echo "${NODEJS_SHA256SUM}  /tmp/nodejs.tgz" | sha256sum -c \
 && tar zxf /tmp/nodejs.tgz -C /usr/local --strip-components=1
 
