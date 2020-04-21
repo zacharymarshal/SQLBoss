@@ -34,12 +34,12 @@ start:
 
 .PHONY: migration
 migration:
-    Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sqlboss
-    Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sessions
+	Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sqlboss \
+	Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sessions
 
 .PHONY: user
 user:
-    Vendor/cakephp/cakephp/lib/Cake/Console/cake user create admin admin
+	Vendor/cakephp/cakephp/lib/Cake/Console/cake user create admin admin
 
 .PHONY: bash
 bash:
@@ -47,7 +47,7 @@ bash:
 
 .PHONY: psql
 psql:
-    docker exec -it sqlboss_db_1 psql -U docker -d sqlboss
+	docker exec -it sqlboss_db_1 psql -U docker -d sqlboss
 
 .PHONY: stop
 stop:
