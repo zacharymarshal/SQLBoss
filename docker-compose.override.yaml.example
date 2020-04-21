@@ -4,7 +4,7 @@ networks:
     external:
       name: illuminateeducation
 services:
-  sqlboss:
+  php:
     ports:
       - "8000:80"
     volumes:

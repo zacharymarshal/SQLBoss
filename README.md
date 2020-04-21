@@ -7,7 +7,10 @@ SQLBoss
 ### Rename docker-compose.override.yaml.example
 
 ```
-mv docker-compose.override.yaml.example docker-compose.override.yaml
+cp docker-compose.override.yaml.example docker-compose.override.yaml
+cp Config/database.php.default Config/database.php
+cp Config/core.php.docker Config/core.php
+bower install
 ```
 
 ### Run docker-compose
@@ -27,16 +30,4 @@ make migration
 Username will be `admin` and it will prompt you to input a new password.
 ```
 make user
-```
-
-### Note: If developing locally change the quay image to local build
-
-In docker-compose.yaml remove:
-```
-image: quay.io/illuminateeducation/sqlboss:master
-```
-
-and add:
-```
-build: .
 ```
