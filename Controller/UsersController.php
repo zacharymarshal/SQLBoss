@@ -165,6 +165,8 @@ class UsersController extends AppController
             if ("illuminateed.net" === $domain) {
                 $this->Auth->login($data);
                 $this->redirect(array('controller' => 'databases', 'action' => 'index'), null, false);
+            } else {
+                $this->Session->setFlash("Please login with an Illuminate Education authorized user or contact an admin.");
             }
         }
     }
