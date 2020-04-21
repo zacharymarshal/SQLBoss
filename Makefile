@@ -43,7 +43,7 @@ user:
 
 .PHONY: bash
 bash:
-	docker-compose exec -it sqlboss_1 /bin/bash
+	docker-compose exec -it sqlboss /bin/bash
 
 .PHONY: psql
 psql:
