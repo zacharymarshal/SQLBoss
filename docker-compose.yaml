@@ -1,9 +1,16 @@
 version: '2'
 
 services:
-  sqlboss:
+  php:
     build: .
     environment:
       CAKEPHP_SALT: dei8itaiki9aey8eigaineiX
       CAKEPHP_CIPHER: gaizi4quizaefeequ6Uph6wohpheiGhoo0op
       CAKEPHP_DEBUG: 0
+  db:
+    image: postgres:9.6.12-alpine
+    container_name: sqlboss_db_1
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=docker
+      - POSTGRES_DB=sqlboss
