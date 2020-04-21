@@ -32,6 +32,23 @@ run:
 start:
 	docker run -d --name $(NAME) $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION)
 
+.PHONY: migration
+migration:
+	docker-compose exec php Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sqlboss
+	docker-compose exec php Vendor/cakephp/cakephp/lib/Cake/Console/cake schema create sessions
+
+.PHONY: user
+user:
+	docker-compose exec php Vendor/cakephp/cakephp/lib/Cake/Console/cake user create admin admin
+
+.PHONY: bash
+bash:
+	docker-compose exec php /bin/bash
+
+.PHONY: psql
+psql:
+	docker-compose exec db psql -U docker -d sqlboss
+
 .PHONY: stop
 stop:
 	docker stop $(NAME)
