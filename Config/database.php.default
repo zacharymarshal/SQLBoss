@@ -4,9 +4,9 @@ class DATABASE_CONFIG {
     public $default = array(
         'datasource' => 'Database/Postgres',
         'persistent' => false,
-        'host'       => 'localhost',
-        'login'      => 'username',
-        'password'   => 'passwd',
+        'host'       => 'sqlboss_db_1',
+        'login'      => 'docker',
+        'password'   => 'docker',
         'database'   => 'sqlboss',
         'prefix'     => '',
     );

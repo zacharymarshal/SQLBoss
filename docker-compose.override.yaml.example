@@ -1,8 +1,18 @@
 version: '2'
-
+networks:
+  default:
+    external:
+      name: illuminateeducation
 services:
-  sqlboss:
+  php:
     ports:
       - "8000:80"
     volumes:
-      - ./Config/database.php:/var/www/html/Config/database.php
+      - ./:/var/www/html/
+  db:
+    image: postgres:9.6.12-alpine
+    container_name: sqlboss_db_1
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=docker
+      - POSTGRES_DB=sqlboss
