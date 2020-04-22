@@ -58,6 +58,7 @@ class UsersController extends AppController
 
     public function edit($id = null)
     {
+        $this->user = $this->User->find("first", ['conditions'=> ['id'=> $id]])["User"];
         $this->User->id = $id;
         if ( ! $this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -167,6 +168,7 @@ class UsersController extends AppController
                 $this->redirect(array('controller' => 'databases', 'action' => 'index'), null, false);
             } else {
                 $this->Session->setFlash("Please login with an Illuminate Education authorized user or contact an admin.");
+                $this->Session->delete('token');
             }
         }
     }

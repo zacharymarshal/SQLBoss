@@ -23,7 +23,6 @@ class UserShell extends AppShell
 
         $user_data = array(
             'username'    => $username,
-            'password'    => $password,
             'access_role' => $access_role,
         );
 

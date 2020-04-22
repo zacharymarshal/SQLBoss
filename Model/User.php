@@ -11,18 +11,6 @@ class User extends AppModel
                 'rule' => 'isUnique',
                 'last' => false,
             ),
-            'Only alphabets and numbers allowed' => array(
-                'rule'       => 'alphaNumeric',
-                'allowEmpty' => false,
-                'required'   => true,
-            ),
-        ),
-        'password' => array(
-            'Your password must be at least 6 characters long' => array(
-                'rule'       => array('minLength', 6),
-                'allowEmpty' => false,
-                'required'   => true,
-            ),
         ),
         'access_role' => array(
             'valid' => array(
@@ -47,7 +35,6 @@ class User extends AppModel
 
     public function beforeSave($options = array())
     {
-        $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
         return true;
     }
 }

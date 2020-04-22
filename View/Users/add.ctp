@@ -11,7 +11,6 @@
       <legend><?php echo __('Add User'); ?></legend>
     <?php
       echo $this->Form->input('username');
-      echo $this->Form->input('password');
       echo $this->Form->input('access_role', array(
         'options' => $access_roles
       ));
