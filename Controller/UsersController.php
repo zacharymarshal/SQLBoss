@@ -117,7 +117,6 @@ class UsersController extends AppController
     public function google_login()
     {
         try {
-            Configure::load('google', 'default');
             $this->googleClient = new Google_Client();
             $this->googleClient->setApplicationName(Configure::read('GOOGLE_APP_NAME'));
             $this->googleClient->setClientId(Configure::read('GOOGLE_OAUTH_CLIENT_ID'));
@@ -138,7 +137,7 @@ class UsersController extends AppController
         {
             $this->googleClient->authenticate($this->request->query['code']);
             $this->Session->write('token', $this->googleClient->getAccessToken());
-            $this->redirect(filter_var(GOOGLE_OAUTH_REDIRECT_URI, FILTER_SANITIZE_URL), null, false);
+            $this->redirect(filter_var(Configure::read('GOOGLE_OAUTH_REDIRECT_URI'), FILTER_SANITIZE_URL), null, false);
             return;
         }
 
@@ -154,15 +153,9 @@ class UsersController extends AppController
             $email 				= filter_var($user['email'], FILTER_SANITIZE_EMAIL);
             $domain 				= $user['hd'];
             $this->Session->write('token', $this->googleClient->getAccessToken());
-        } else {
-            $authUrl = $this->googleClient->createAuthUrl();
-        }
 
-        if(isset($authUrl)) {
-            $this->set('authUrl', $authUrl);
-        } else {
-            $data = $this->User->find("first", ['conditions'=> ['username'=> $email]])["User"];
             if ("illuminateed.net" === $domain) {
+                $data = $this->User->find("first", ['conditions'=> ['username'=> $email]])["User"];
                 $this->Auth->login($data);
                 $this->redirect(array('controller' => 'databases', 'action' => 'index'), null, false);
             } else {
@@ -170,5 +163,8 @@ class UsersController extends AppController
                 $this->Session->delete('token');
             }
         }
+
+        $authUrl = $this->googleClient->createAuthUrl();
+        $this->set(compact('authUrl'));
     }
 }
