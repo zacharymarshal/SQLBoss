@@ -117,12 +117,13 @@ class UsersController extends AppController
     public function google_login()
     {
         try {
+            Configure::load('google', 'default');
             $this->googleClient = new Google_Client();
-            $this->googleClient->setApplicationName(GOOGLE_APP_NAME);
-            $this->googleClient->setClientId(GOOGLE_OAUTH_CLIENT_ID);
-            $this->googleClient->setClientSecret(GOOGLE_OAUTH_CLIENT_SECRET);
-            $this->googleClient->setRedirectUri(GOOGLE_OAUTH_REDIRECT_URI);
-            $this->googleClient->addScope(GOOGLE_OAUTH_SCOPE);
+            $this->googleClient->setApplicationName(Configure::read('GOOGLE_APP_NAME'));
+            $this->googleClient->setClientId(Configure::read('GOOGLE_OAUTH_CLIENT_ID'));
+            $this->googleClient->setClientSecret(Configure::read('GOOGLE_OAUTH_CLIENT_SECRET'));
+            $this->googleClient->setRedirectUri(Configure::read('GOOGLE_OAUTH_REDIRECT_URI'));
+            $this->googleClient->addScope(Configure::read('GOOGLE_OAUTH_SCOPE'));
         } catch (Exception $e) {
             $this->Session->setFlash($e->getMessage());
         }
@@ -157,11 +158,9 @@ class UsersController extends AppController
             $authUrl = $this->googleClient->createAuthUrl();
         }
 
-        if(isset($authUrl))
-        {
+        if(isset($authUrl)) {
             $this->set('authUrl', $authUrl);
-        } else
-        {
+        } else {
             $data = $this->User->find("first", ['conditions'=> ['username'=> $email]])["User"];
             if ("illuminateed.net" === $domain) {
                 $this->Auth->login($data);

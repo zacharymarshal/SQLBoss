@@ -1,0 +1,8 @@
+<?php
+$config = array(
+    'GOOGLE_APP_NAME' => 'ie',
+    'GOOGLE_OAUTH_CLIENT_ID' => 'client_id',
+    'GOOGLE_OAUTH_CLIENT_SECRET' => 'client_secret',
+    'GOOGLE_OAUTH_REDIRECT_URI' => 'http://127.0.0.1:8000/index.php/users/login',
+    'GOOGLE_OAUTH_SCOPE' => 'https://www.googleapis.com/auth/userinfo.email',
+);
