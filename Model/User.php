@@ -7,9 +7,13 @@ class User extends AppModel
 {
     public $validate = array(
         'username' => array(
-            'This username has already been taken' => array(
-                'rule' => 'isUnique',
-                'last' => false,
+            'isUnique' => array(
+                    'rule' => 'isUnique',
+                    'message' => 'Username already exists.',
+            ),
+            'isValidEmail' => array(
+                    'rule'    => '/^.+@illuminateed\.net$/i',
+                    'message' => 'Username is not valid "@illuminateed.net" email.',
             ),
         ),
         'access_role' => array(
