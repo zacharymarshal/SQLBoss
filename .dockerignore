@@ -16,4 +16,3 @@ webroot/media/bower_components/*
 node_modules/*
 .idea/
 docker-compose*
-.env
