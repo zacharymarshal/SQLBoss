@@ -146,7 +146,6 @@ class UsersController extends AppController
             $this->googleClient->setAccessToken($this->Session->read('token'));
         }
 
-
         if ($this->googleClient->getAccessToken())
         {
             $user 				= $google_oauth->userinfo->get();
@@ -154,17 +153,25 @@ class UsersController extends AppController
             $domain 				= $user['hd'];
             $this->Session->write('token', $this->googleClient->getAccessToken());
 
-            if ("illuminateed.net" === $domain) {
-                $data = $this->User->find("first", ['conditions'=> ['username'=> $email]])["User"];
-                $this->Auth->login($data);
-                $this->redirect(array('controller' => 'databases', 'action' => 'index'), null, false);
-            } else {
-                $this->Session->setFlash("Please login with an Illuminate Education authorized user or contact an admin.");
-                $this->Session->delete('token');
+            $domains = explode(",", Configure::read('GOOGLE_OAUTH_ALLOWED_DOMAINS'));
+            if (!in_array($domain, $domains)) {
+                $this->flashError();
             }
+            $data = $this->User->find("first", ['conditions'=> ['username'=> $email]]);
+            if (empty($data['User'])) {
+                $this->flashError();
+            }
+            $this->Auth->login($data['User']);
+            $this->redirect(array('controller' => 'databases', 'action' => 'index'), null, false);
         }
 
         $authUrl = $this->googleClient->createAuthUrl();
         $this->set(compact('authUrl'));
+    }
+
+    private function flashError()
+    {
+        $this->Session->setFlash("Please login with an Illuminate Education authorized user or contact an admin.");
+        $this->Session->delete('token');
     }
 }
