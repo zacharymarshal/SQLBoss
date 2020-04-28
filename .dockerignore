@@ -1,6 +1,5 @@
 [Cc]onfig/core.php
 [Cc]onfig/database.php
-[Cc]onfig/google.php
 !empty
 .DS_Store
 Vendor/*
