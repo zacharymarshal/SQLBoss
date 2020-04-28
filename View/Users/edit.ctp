@@ -12,7 +12,6 @@
     <?php
       echo $this->Form->input('id');
       echo $this->Form->input('username');
-      echo $this->Form->input('password', array('value' => ''));
       echo $this->Form->input('access_role', array(
         'options' => $access_roles
       ));

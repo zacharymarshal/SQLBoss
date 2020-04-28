@@ -4,8 +4,11 @@ App::uses('AppController', 'Controller');
 
 class UsersController extends AppController
 {
+    private $user = null;
+    private $googleClient= null;
     public function isAuthorized($user)
     {
+        $this->user = $user;
         if ($this->action == 'logout') {
             return true;
         }
@@ -55,6 +58,7 @@ class UsersController extends AppController
 
     public function edit($id = null)
     {
+        $this->user = $this->User->find("first", ['conditions'=> ['id'=> $id]])["User"];
         $this->User->id = $id;
         if ( ! $this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -69,10 +73,16 @@ class UsersController extends AppController
         } else {
             $this->request->data = $this->User->read(null, $id);
         }
-        $access_roles = array(
-            'admin'   => 'Administrator',
-            'limited' => 'Limited'
-        );
+        if (isset($this->user['access_role']) && $this->user['access_role'] === 'admin') {
+            $access_roles = array(
+                'admin'   => 'Administrator',
+                'limited' => 'Limited'
+            );
+        } else {
+            $access_roles = array(
+                'limited' => 'Limited'
+            );
+        }
         $this->set(compact('access_roles'));
     }
 
@@ -95,23 +105,66 @@ class UsersController extends AppController
 
     public function login()
     {
-        if ($this->Session->read('Auth.User')) {
-            $this->Session->setFlash('You are logged in!');
-            $this->redirect(array('controller' => 'databases', 'action' => 'index'), null, false);
-        }
-
-        if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Session->setFlash('Your username or password was incorrect.');
-            }
-        }
+        $this->google_login();
     }
 
     public function logout()
     {
-        $this->Session->setFlash('Good-Bye');
+        $this->Session->delete('token');
         $this->redirect($this->Auth->logout());
+    }
+
+    public function google_login()
+    {
+        try {
+            $this->googleClient = new Google_Client();
+            $this->googleClient->setApplicationName(Configure::read('GOOGLE_APP_NAME'));
+            $this->googleClient->setClientId(Configure::read('GOOGLE_OAUTH_CLIENT_ID'));
+            $this->googleClient->setClientSecret(Configure::read('GOOGLE_OAUTH_CLIENT_SECRET'));
+            $this->googleClient->setRedirectUri(Configure::read('GOOGLE_OAUTH_REDIRECT_URI'));
+            $this->googleClient->addScope(Configure::read('GOOGLE_OAUTH_SCOPE'));
+        } catch (Exception $e) {
+            $this->Session->setFlash($e->getMessage());
+        }
+
+        try {
+            $google_oauth = new \Google_Service_Oauth2($this->googleClient);
+        } catch (Exception $e) {
+            $this->Session->setFlash($e->getMessage());
+        }
+
+        if (isset($this->request->query['code']))
+        {
+            $this->googleClient->authenticate($this->request->query['code']);
+            $this->Session->write('token', $this->googleClient->getAccessToken());
+            $this->redirect(filter_var(Configure::read('GOOGLE_OAUTH_REDIRECT_URI'), FILTER_SANITIZE_URL), null, false);
+            return;
+        }
+
+        if ($this->Session->read('token'))
+        {
+            $this->googleClient->setAccessToken($this->Session->read('token'));
+        }
+
+
+        if ($this->googleClient->getAccessToken())
+        {
+            $user 				= $google_oauth->userinfo->get();
+            $email 				= filter_var($user['email'], FILTER_SANITIZE_EMAIL);
+            $domain 				= $user['hd'];
+            $this->Session->write('token', $this->googleClient->getAccessToken());
+
+            if ("illuminateed.net" === $domain) {
+                $data = $this->User->find("first", ['conditions'=> ['username'=> $email]])["User"];
+                $this->Auth->login($data);
+                $this->redirect(array('controller' => 'databases', 'action' => 'index'), null, false);
+            } else {
+                $this->Session->setFlash("Please login with an Illuminate Education authorized user or contact an admin.");
+                $this->Session->delete('token');
+            }
+        }
+
+        $authUrl = $this->googleClient->createAuthUrl();
+        $this->set(compact('authUrl'));
     }
 }

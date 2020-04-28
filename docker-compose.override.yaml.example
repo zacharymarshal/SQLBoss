@@ -9,6 +9,12 @@ services:
       - "8000:80"
     volumes:
       - ./:/var/www/html/
+    environment:
+      - "GOOGLE_APP_NAME=${GOOGLE_APP_NAME}"
+      - "GOOGLE_OAUTH_CLIENT_ID=${GOOGLE_OAUTH_CLIENT_ID}"
+      - "GOOGLE_OAUTH_CLIENT_SECRET=${GOOGLE_OAUTH_CLIENT_SECRET}"
+      - "GOOGLE_OAUTH_REDIRECT_URI=${GOOGLE_OAUTH_REDIRECT_URI}"
+      - "GOOGLE_OAUTH_SCOPE=${GOOGLE_OAUTH_SCOPE}"
   db:
     image: postgres:9.6.12-alpine
     container_name: sqlboss_db_1

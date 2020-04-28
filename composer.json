@@ -6,7 +6,10 @@
     "files": ["Lib/SQLBoss/describe_functions.php"]
   },
   "config": {
-    "vendor-dir": "Vendor"
+    "vendor-dir": "Vendor",
+    "platform": {
+      "php": "5.6"
+    }
   },
   "require": {
     "cakephp/cakephp": "2.*",
@@ -15,6 +18,7 @@
     "ext-pdo_pgsql": "*",
     "ext-pgsql": "*",
     "ext-mcrypt": "*",
+    "google/apiclient": "^2.0",
     "assetrinc/assetrinc": "0.*"
   }
 }
